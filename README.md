@@ -39,12 +39,12 @@
 
 ### Streams Endpoints
 
-| METHOD | ENDPOINT     | TOKEN | ROLE  | DESCRIPTION     | POST PARAMS | RETURNS                    |
-| ------ | ------------ | ----- | ----- | --------------- | ----------- | -------------------------- |
-| GET    | /streams     | YES   | -     | Get all streams | -           | [{ streams }]              |
-| GET    | /streams/:id | YES   | -     | Join stream     | stream_id   | { stream }                 |
-| POST   | /me/streams  | YES   | -     | Create stream   | -           | { stream }                 |
-| DELETE | /streams/:id | YES   | Admin | Remove stream   | stream_id   | "Streams has been deleted" |
+| METHOD | ENDPOINT     | TOKEN | ROLE  | DESCRIPTION     | POST PARAMS         | RETURNS                    |
+| ------ | ------------ | ----- | ----- | --------------- | ------------------- | -------------------------- |
+| GET    | /streams     | YES   | -     | Get all streams | query: search string| [{ streams }]              |
+| GET    | /streams/:id | YES   | -     | Join stream     | stream_id           | { stream }                 |
+| POST   | /me/streams  | YES   | -     | Create stream   | -                   | { stream }                 |
+| DELETE | /streams/:id | YES   | Admin | Remove stream   | stream_id           | "Streams has been deleted" |
 
 ### Genres Endpoints
 
