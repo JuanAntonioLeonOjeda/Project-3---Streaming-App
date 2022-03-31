@@ -1,0 +1,29 @@
+{
+  "name": "project-3---streaming-app",
+  "version": "1.0.0",
+  "description": "### Auth Endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanAntonioLeonOjeda/Project-3---Streaming-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanAntonioLeonOjeda/Project-3---Streaming-App/issues"
+  },
+  "homepage": "https://github.com/JuanAntonioLeonOjeda/Project-3---Streaming-App#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.9",
+    "morgan": "^1.10.0"
+  }
+}
