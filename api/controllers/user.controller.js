@@ -23,8 +23,18 @@ async function deleteProfile(req, res) {
     const user = await UserModel.findByIdAndDelete(res.locals.user.id)
     res.status(200).send(`User ${user.userName} has been deleted`)
   } catch (error) {
-    
+    res.status(500).send(`Couldn't delete user profile, error: ${error}`)
   }
 }
 
-module.exports = { getAllUsers, getOneUser, deleteProfile }
+async function getProfile(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).send(`Couldn't get user profile, error: ${error}`)
+  }
+}
+  
+
+module.exports = { getAllUsers, getOneUser, deleteProfile, getProfile }

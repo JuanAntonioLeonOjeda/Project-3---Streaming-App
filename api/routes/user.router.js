@@ -1,11 +1,13 @@
 const router = require('express').Router()
 const { authUser, authAdmin } = require('../utils')
 
-const { getAllUsers, getOneUser, deleteProfile } = require('../controllers/user.controller')
+const { getAllUsers, getOneUser, deleteProfile, getProfile } = require('../controllers/user.controller')
 
 router
     .get('/', authUser, authAdmin, getAllUsers)
-    .get('/:userId', authUser, authAdmin, getOneUser)
+    .get('/me', authUser, getProfile)
     .delete('/me', authUser, deleteProfile)
+    
+    .get('/:userId', authUser, authAdmin, getOneUser)
 
 module.exports = router
