@@ -41,7 +41,8 @@ const streamSchema = new mongoose.Schema({
     ref: 'user'
   }],
   live: {
-    type: Boolean
+    type: Boolean,
+    default: true
   }
 })
 
