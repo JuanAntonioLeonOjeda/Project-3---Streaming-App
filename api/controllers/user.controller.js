@@ -72,7 +72,7 @@ async function getMyFriends(req, res) {
   }
 }
 
-async function addOneFriend(req, res) {
+async function addFriend(req, res) {
   try {
     const user = await UserModel.findById(res.locals.user.id)
     user.friends.push(req.params.friendId)
@@ -83,7 +83,7 @@ async function addOneFriend(req, res) {
   }
 }
 
-async function removeOneFriend(req, res) {
+async function removeFriend(req, res) {
   try {
     const user = await UserModel.findById(res.locals.user.id)
     user.friends.remove(req.params.friendId)
@@ -91,6 +91,37 @@ async function removeOneFriend(req, res) {
     res.status(200).send("Friend has been removed!")
   } catch (error) {
     res.status(500).send(`Couldn't remove friend, error: ${error}`)
+  }
+}
+
+async function getMyFavoriteStreamers(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    res.status(200).json(user.favoriteStreamers)
+  } catch (error) {
+    res.status(500).send(`Couldn't get favorite streamers, error: ${error}`)
+  }
+}
+
+async function addFavoriteStreamer(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    user.favoriteStreamers.push(req.params.favoriteStreamerId)
+    await user.save()
+    res.status(200).send("Streamer added to your list!")
+  } catch (error) {
+    res.status(500).send(`Couldn't add streamer to favorites list, error: ${error}`)
+  }
+}
+
+async function removeFavoriteStreamer(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    user.favoriteStreamers.remove(req.params.favoriteStreamerId)
+    await user.save()
+    res.status(200).send("Streamer has been removed!")
+  } catch (error) {
+    res.status(500).send(`Couldn't remove favorite streamer, error: ${error}`)
   }
 }
 
@@ -103,6 +134,9 @@ module.exports = {
   getAllMyStreams, 
   getMyBadges, 
   getMyFriends,
-  addOneFriend,
-  removeOneFriend
+  addFriend,
+  removeFriend,
+  getMyFavoriteStreamers,
+  addFavoriteStreamer,
+  removeFavoriteStreamer
   }
