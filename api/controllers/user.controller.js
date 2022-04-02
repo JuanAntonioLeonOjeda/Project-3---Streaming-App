@@ -18,4 +18,13 @@ async function getOneUser(req, res) {
   }
 }
 
-module.exports = { getAllUsers, getOneUser }
+async function deleteProfile(req, res) {
+  try {
+    const user = await UserModel.findByIdAndDelete(res.locals.user.id)
+    res.status(200).send(`User ${user.userName} has been deleted`)
+  } catch (error) {
+    
+  }
+}
+
+module.exports = { getAllUsers, getOneUser, deleteProfile }
