@@ -14,7 +14,7 @@ function authUser(req, res, next) {
             }
             UserModel.findOne(
                 { email: token.email },
-                { password: 0, __v: 0 }
+                {  __v: 0 }
             )
                 // finds user with the email inside the token that is in header
                 .then((user) => {

@@ -3,7 +3,6 @@ const { authUser, authAdmin } = require('../utils')
 
 const { 
     getAllUsers, 
-    getOneUser, 
     deleteProfile, 
     getProfile, 
     updateProfile, 
@@ -14,13 +13,20 @@ const {
     removeFriend,
     getMyFavoriteStreamers,
     addFavoriteStreamer,
-    removeFavoriteStreamer
+    removeFavoriteStreamer,
+    getMyFavoriteGenres,
+    addFavoriteGenre,
+    removeFavoriteGenre,
+    changePassword,
+    getOneUser, 
+    addBadgeToUser,
+    removeBadgeFromUser
 } = require('../controllers/user.controller')
 
 router
     .get('/', authUser, authAdmin, getAllUsers)
     .get('/me', authUser, getProfile)
-    .delete('/me', authUser, deleteProfile)
+    .delete('/me/security', authUser, deleteProfile)
     .put('/me', authUser, updateProfile)
     .get('/me/streams', authUser, getAllMyStreams)
     .get('/me/badges', authUser, getMyBadges)
@@ -30,7 +36,13 @@ router
     .get('/me/favoriteStreamers', authUser, getMyFavoriteStreamers)
     .post('/me/favoriteStreamers/:favoriteStreamerId', authUser, addFavoriteStreamer)
     .delete('/me/favoriteStreamers/:favoriteStreamerId', authUser, removeFavoriteStreamer)
+    .get('/me/favoriteGenres', authUser, getMyFavoriteGenres)
+    .post('/me/favoriteGenres/:genreId', authUser, addFavoriteGenre)
+    .delete('/me/favoriteGenres/:genreId', authUser, removeFavoriteGenre)
+    .put('/me/security/password', authUser, changePassword)
 
     .get('/:userId', authUser, authAdmin, getOneUser) //! params id or userId¿?¿?¿?
+    .post('/:userId/badges/:badgeId', authUser, authAdmin, addBadgeToUser)
+    .delete('/:userId/badges/:badgeId', authUser, authAdmin, removeBadgeFromUser)
 
 module.exports = router
