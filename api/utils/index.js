@@ -8,13 +8,13 @@ function authUser(req, res, next) {
         res.status(403).json({ error: "No Token found" });
     } else {
         jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
-            // takes token + secert phrase
+            // takes token + secret phrase
             if (err) {
                 res.status(403).json({ error: "Token not valid" });
             }
             UserModel.findOne(
                 { email: token.email },
-                { password: 0, __v: 0, createdAt: 0 }
+                { password: 0, __v: 0 }
             )
                 // finds user with the email inside the token that is in header
                 .then((user) => {

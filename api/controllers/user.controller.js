@@ -45,4 +45,52 @@ async function updateProfile(req, res) {
   }
 }
 
-module.exports = { getAllUsers, getOneUser, deleteProfile, getProfile, updateProfile }
+async function getAllMyStreams(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    res.status(200).json(user.myStreams)
+  } catch (error) {
+    res.status(500).send(`Couldn't get user streams, error: ${error}`)
+  }
+}
+
+async function getMyBadges(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    res.status(200).json(user.badges)
+  } catch (error) {
+    res.status(500).send(`Couldn't get user badges, error: ${error}`)
+  }
+}
+
+async function getMyFriends(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    res.status(200).json(user.friends)
+  } catch (error) {
+    res.status(500).send(`Couldn't get user badges, error: ${error}`)
+  }
+}
+
+async function addOneFriend(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    user.friends.push(req.params.friendId)
+    await user.save()
+    res.status(200).send("User added!")
+  } catch (error) {
+    res.status(500).send(`Couldn't add friend, error: ${error}`)
+  }
+}
+
+module.exports = { 
+  getAllUsers, 
+  getOneUser, 
+  deleteProfile, 
+  getProfile, 
+  updateProfile, 
+  getAllMyStreams, 
+  getMyBadges, 
+  getMyFriends,
+  addOneFriend 
+  }
