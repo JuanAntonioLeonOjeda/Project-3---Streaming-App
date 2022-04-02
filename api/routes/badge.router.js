@@ -1,7 +1,14 @@
 const router = require('express').Router()
+const {
+  authUser,
+  authAdmin
+} = require ('../utils')
 
-const { getAllBadges } = require ('../controllers/badge.controller')
+const { createOneBadge, getAllBadges, getOneBadge } = require ('../controllers/badge.controller')
 
-router.get('/', getAllBadges)
+router
+  .post('/', authUser, authAdmin, createOneBadge)
+  .get('/', authUser, getAllBadges)
+  .get('/:id', getOneBadge)
 
 module.exports = router
