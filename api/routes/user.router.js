@@ -10,7 +10,8 @@ const {
     getAllMyStreams, 
     getMyBadges,
     getMyFriends,
-    addOneFriend
+    addOneFriend,
+    removeOneFriend
 } = require('../controllers/user.controller')
 
 router
@@ -21,8 +22,9 @@ router
     .get('/me/streams', authUser, getAllMyStreams)
     .get('/me/badges', authUser, getMyBadges)
     .get('/me/friends', authUser, getMyFriends)
-    .post('/me/friends/:friendId', authUser, addOneFriend)
+    .post('/me/friends/:friendId', authUser, addOneFriend) //! params id or friendId¿?¿?¿?
+    .delete('/me/friends/:friendId', authUser, removeOneFriend) //! params id or friendId¿?¿?¿?
 
-    .get('/:userId', authUser, authAdmin, getOneUser)
+    .get('/:userId', authUser, authAdmin, getOneUser) //! params id or userId¿?¿?¿?
 
 module.exports = router

@@ -83,6 +83,17 @@ async function addOneFriend(req, res) {
   }
 }
 
+async function removeOneFriend(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    user.friends.remove(req.params.friendId)
+    await user.save()
+    res.status(200).send("Friend has been removed!")
+  } catch (error) {
+    res.status(500).send(`Couldn't remove friend, error: ${error}`)
+  }
+}
+
 module.exports = { 
   getAllUsers, 
   getOneUser, 
@@ -92,5 +103,6 @@ module.exports = {
   getAllMyStreams, 
   getMyBadges, 
   getMyFriends,
-  addOneFriend 
+  addOneFriend,
+  removeOneFriend
   }
