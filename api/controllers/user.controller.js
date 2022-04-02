@@ -36,5 +36,13 @@ async function getProfile(req, res) {
   }
 }
   
+async function updateProfile(req, res) {
+  try {
+    const user = await UserModel.findByIdAndUpdate(res.locals.user.id, req.body)
+    res.status(200).send("Changes were successfully updated")
+  } catch (error) {
+    res.status(500).send(`Couldn't update user profile, error: ${error}`)
+  }
+}
 
-module.exports = { getAllUsers, getOneUser, deleteProfile, getProfile }
+module.exports = { getAllUsers, getOneUser, deleteProfile, getProfile, updateProfile }
