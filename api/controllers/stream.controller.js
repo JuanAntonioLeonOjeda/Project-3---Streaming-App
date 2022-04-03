@@ -95,7 +95,6 @@ async function removeStream(req, res) {
     await streamer.save()
     const viewers = await UserModel.find({ myActivity: stream.id })
     viewers.forEach(async viewer => {
-
       viewer.myActivity = viewer.myActivity.filter(activity => {
         return activity.toString() !== stream.id
       })
