@@ -15,12 +15,19 @@ async function getLiveStreams(req, res) {
   try {
     if(Object.keys(req.query)[0] === 'genre') {
       const genre = await GenreModel.findById(req.query.genre)
-      const streams = await StreamModel.find({ live: true, genre: genre }, { quality: 0 })
-      if(!streams.length) return res.status(404).send(`No live streams available for ${genre.name} genre :(`)
+
+      const query = { live: true, genre: genre }
+      const streams = searchStreams(query)
+
+      if(!streams.length) return resultMessage(query, res)
+
       res.status(200).json(streams)
     } else {
-      const streams = await StreamModel.find({ live: true }, { quality: 0 })
-      if(!streams.length) return res.status(404).send('No live streams available :(')
+      const query = { live: true }
+      const streams = searchStreams(query)
+
+      if(!streams.length) return resultMessage(query, res)
+
       res.status(200).json(streams)
     }
   } catch (error) {
@@ -28,19 +35,25 @@ async function getLiveStreams(req, res) {
   }
 }
 
+async function searchStreams(query) {
+  return await StreamModel.find(query, { quality: 0 })
+}
+
+async function resultMessage(query, res) {
+  if(query.hasOwnProperty('genre')) return res.status(404).send(`No live streams available for ${query.genre.name} genre :(`)
+  res.status(404).send('No live streams available :(')
+}
+
 async function joinStream(req, res) {
   try {
     const user = res.locals.user
     const stream = await StreamModel.findById(req.params.id)
+
     if(!stream.live) return res.status(404).send('This stream has ended')
-    if(stream.currentViewers.indexOf(user.id) === -1) {
-      stream.currentViewers.push(user.id)
-    }
-    if(stream.totalViews.indexOf(user.id) === -1) {
-      stream.totalViews.push(user.id)
-      user.myActivity.push(stream.id)
-      await user.save()
-    }
+
+    addCurrentViewer(stream, user)
+    increaseTotalViews(stream, user)
+
     await stream.save()
     res.status(200).json(stream)
   } catch (error) {
@@ -48,30 +61,59 @@ async function joinStream(req, res) {
   }
 }
 
+function addCurrentViewer(stream, user) {
+  if(stream.currentViewers.indexOf(user.id) === -1) {
+    stream.currentViewers.push(user.id)
+  }
+}
+
+async function increaseTotalViews(stream, user) {
+  if(stream.totalViews.indexOf(user.id) === -1) {
+    stream.totalViews.push(user.id)
+    user.myActivity.push(stream.id)
+    await user.save()
+  }
+}
+
 async function createStream(req, res) {
   try {
     const streamer = res.locals.user
     if (streamer.live) return res.status(403).send(`Already streaming. Please stop current stream before starting a new one`)
+
     const stream = await StreamModel.create(req.body)
     const genre = await GenreModel.findById(stream.genre)
-    stream.streamer = streamer.id
-    streamer.myStreams.push(stream.id)
-    streamer.live = true
-    genre.streams.push(stream.id)
-    await stream.save()
-    await streamer.save()
-    await genre.save()
+
+    assignStreamer(stream, streamer)
+    addLiveStreamToGenre(stream, genre)
+    
     res.status(200).json({ message: 'Stream started!', id: stream.id })
   } catch (error) {
     res.status(500).send(`Couldn't start stream: ${error}`)
   }
 }
 
+  async function assignStreamer(stream, streamer) {
+    stream.streamer = streamer.id
+    streamer.myStreams.push(stream.id)
+    streamer.live = true
+
+    await stream.save()
+    await streamer.save()
+  }
+
+  async function addLiveStreamToGenre(stream, genre) {
+    genre.streams.push(stream.id)
+    
+    await genre.save()
+  }
+
 async function updateStream(req, res) {
   try {
     const streamer = res.locals.user
     const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, { description: req.body.description })
+
     if(!stream) return res.status(404).send('No active stream available')
+
     res.status(200).json({ message: 'Stream updated', stream })
   } catch (error) {
     res.status(500).send(`Couldn't update stream: ${error}`)
@@ -82,36 +124,58 @@ async function stopStream(req, res) {
   try {
     const streamer = res.locals.user
     const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, { live: false })
+
     if(!stream) return res.status(404).send(`You don't have any active streams`)
+
     const genre = await GenreModel.findById(stream.genre)
-    streamer.live = false
-    const index = genre.streams.indexOf(stream.id)
-    genre.streams.splice(index,1)
-    await streamer.save()
-    await genre.save()
+
+    removeLiveStreamFromGenre(stream, genre)
+    streamerNotLive(streamer)
+    
     res.status(200).send('Stream stopped')
   } catch (error) {
     res.status(500).send(`Couldn't stop stream: ${error}`)
   }
 }
 
+async function removeLiveStreamFromGenre(stream, genre) {
+  const index = genre.streams.indexOf(stream.id)
+  genre.streams.splice(index,1)
+  await genre.save()
+}
+
+async function streamerNotLive(streamer) {
+  streamer.live = false
+  await streamer.save()
+}
+
 async function removeStream(req, res) {
   try {
     const stream = await StreamModel.findByIdAndDelete(req.params.id)
-    const streamer = await UserModel.findById(stream.streamer)
-    streamer.myStreams.remove(stream.id)
-    await streamer.save()
-    const viewers = await UserModel.find({ myActivity: stream.id })
-    viewers.forEach(async viewer => {
-      viewer.myActivity = viewer.myActivity.filter(activity => {
-        return activity.toString() !== stream.id
-      })
-      await viewer.save()
-    })
+    
+    removeStreamFromStreamer(stream)
+    removeStreamFromViewersActivity(stream)
+    
     res.status(200).send('Stream removed')
   } catch (error) {
     res.status(500).send(`Couldn't remove stream: ${error}`)
   }
+}
+
+async function removeStreamFromStreamer(stream) {
+  const streamer = await UserModel.findById(stream.streamer)
+  streamer.myStreams.remove(stream.id)
+  await streamer.save()
+}
+
+async function removeStreamFromViewersActivity(stream) {
+  const viewers = await UserModel.find({ myActivity: stream.id })
+  viewers.forEach(async viewer => {
+    viewer.myActivity = viewer.myActivity.filter(activity => {
+      return activity.toString() !== stream.id
+    })
+    await viewer.save()
+    })
 }
 
 module.exports = {
