@@ -5,6 +5,7 @@ const GenreModel = require('../models/genre.model')
 async function getAllStreams(req, res) {
   try {
     const streams = await StreamModel.find({}, { currentViewers: 0, quality: 0 })
+
     res.status(200).json(streams)
   } catch (error) {
     res.status(500).send(`Couldn't get all streams: ${error}`)
@@ -17,14 +18,14 @@ async function getLiveStreams(req, res) {
       const genre = await GenreModel.findById(req.query.genre)
 
       const query = { live: true, genre: genre }
-      const streams = searchStreams(query)
+      const streams = await searchStreams(query)
 
       if(!streams.length) return resultMessage(query, res)
 
       res.status(200).json(streams)
     } else {
       const query = { live: true }
-      const streams = searchStreams(query)
+      const streams = await searchStreams(query)
 
       if(!streams.length) return resultMessage(query, res)
 
@@ -52,7 +53,7 @@ async function joinStream(req, res) {
     if(!stream.live) return res.status(404).send('This stream has ended')
 
     addCurrentViewer(stream, user)
-    increaseTotalViews(stream, user)
+    await increaseTotalViews(stream, user)
 
     await stream.save()
     res.status(200).json(stream)
@@ -81,10 +82,9 @@ async function createStream(req, res) {
     if (streamer.live) return res.status(403).send(`Already streaming. Please stop current stream before starting a new one`)
 
     const stream = await StreamModel.create(req.body)
-    const genre = await GenreModel.findById(stream.genre)
 
-    assignStreamer(stream, streamer)
-    addLiveStreamToGenre(stream, genre)
+    await assignStreamer(stream, streamer)
+    await addLiveStreamToGenre(stream)
     
     res.status(200).json({ message: 'Stream started!', id: stream.id })
   } catch (error) {
@@ -101,7 +101,8 @@ async function createStream(req, res) {
     await streamer.save()
   }
 
-  async function addLiveStreamToGenre(stream, genre) {
+  async function addLiveStreamToGenre(stream) {
+    const genre = await GenreModel.findById(stream.genre)
     genre.streams.push(stream.id)
     
     await genre.save()
@@ -127,10 +128,8 @@ async function stopStream(req, res) {
 
     if(!stream) return res.status(404).send(`You don't have any active streams`)
 
-    const genre = await GenreModel.findById(stream.genre)
-
-    removeLiveStreamFromGenre(stream, genre)
-    streamerNotLive(streamer)
+    await removeLiveStreamFromGenre(stream)
+    await streamerNotLive(streamer)
     
     res.status(200).send('Stream stopped')
   } catch (error) {
@@ -138,8 +137,10 @@ async function stopStream(req, res) {
   }
 }
 
-async function removeLiveStreamFromGenre(stream, genre) {
+async function removeLiveStreamFromGenre(stream) {
+  const genre = await GenreModel.findById(stream.genre)
   const index = genre.streams.indexOf(stream.id)
+
   genre.streams.splice(index,1)
   await genre.save()
 }
@@ -153,8 +154,8 @@ async function removeStream(req, res) {
   try {
     const stream = await StreamModel.findByIdAndDelete(req.params.id)
     
-    removeStreamFromStreamer(stream)
-    removeStreamFromViewersActivity(stream)
+    await removeStreamFromStreamer(stream)
+    await removeStreamFromViewersActivity(stream)
     
     res.status(200).send('Stream removed')
   } catch (error) {
@@ -165,7 +166,17 @@ async function removeStream(req, res) {
 async function removeStreamFromStreamer(stream) {
   const streamer = await UserModel.findById(stream.streamer)
   streamer.myStreams.remove(stream.id)
+
+  await checkIfLive(stream, streamer)
+
   await streamer.save()
+}
+
+async function checkIfLive(stream, streamer) {
+  if(stream.live) {
+    streamer.live = false
+    await removeLiveStreamFromGenre(stream)
+  }
 }
 
 async function removeStreamFromViewersActivity(stream) {
