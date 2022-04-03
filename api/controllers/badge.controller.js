@@ -23,8 +23,32 @@ async function getOneBadge(req, res) {
     const badge = await BadgeModel.findOne()
     res.status(200).json(badge)
   } catch (error) {
-    res.status(500).send(`Couldn't get that badge ${error}`)
+    res.status(500).send(`Couldn't get badge ${error}`)
   }
 }
 
-module.exports = { createOneBadge, getAllBadges, getOneBadge }
+async function updateOneBadge(req, res) {
+  try {
+    const badge = await BadgeModel.findByIdAndUpdate(req.params.id,req.body)
+    res.status(200).json(badge)
+  } catch (error) {
+    res.status(500).send(`Couldn't update badge ${error}`)
+  }
+}
+
+async function removeOneBadge(req, res) {
+  try {
+    const badge = await BadgeModel.findByIdAndDelete(req.params.id)
+    res.status(200).send(`${badge.title} successfully removed`)
+  } catch (error) {
+    res.status(500).send(`Couldn't remove badge ${error}`)
+  }
+}
+
+module.exports = {
+  createOneBadge,
+  getAllBadges,
+  getOneBadge,
+  updateOneBadge,
+  removeOneBadge
+}
