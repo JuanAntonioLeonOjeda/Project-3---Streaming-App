@@ -18,7 +18,8 @@ const streamSchema = new mongoose.Schema({
   },
   genre: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'genre'
+    ref: 'genre',
+    required: [true, 'Please insert a music genre']
   },
   currentViewers: [{
     type: mongoose.Schema.Types.ObjectId,
