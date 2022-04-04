@@ -339,6 +339,7 @@ export default {
           password: this.pass1
         }
       })
+      this.$router.push({ path: '/home' })
     },
     async signup () {
       const form = {
