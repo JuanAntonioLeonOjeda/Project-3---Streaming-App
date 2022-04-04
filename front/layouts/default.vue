@@ -1,11 +1,15 @@
 <template>
   <v-app dark>
     <v-main>
+      <NavBar />
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
+<<<<<<< HEAD
     <FooterBar />
+=======
+>>>>>>> f6cdf6db545ba35c864b1d871d7a2ffe917e3221
   </v-app>
 </template>
 <script>
