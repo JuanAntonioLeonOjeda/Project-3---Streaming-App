@@ -14,7 +14,7 @@ const morgan = require('morgan')
       })
       console.log('connected to DB successfully')
     } catch (error) {
-      throw new Error(`Error connecting to DB: ${err}`)
+      throw new Error(`Error connecting to DB: ${error}`)
     }
   })()
 

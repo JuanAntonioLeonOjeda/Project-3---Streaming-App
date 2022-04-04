@@ -261,6 +261,7 @@
                               elevation="2"
                               x-large
                               block
+                              @click="login"
                             >
                               login
                             </v-btn>
@@ -271,25 +272,6 @@
                   </v-row>
                 </v-window-item>
               </v-window>
-              <v-alert
-                :class="{ alert: alert, 'text-success': noError }"
-                dismissible
-                outlined
-                prominent
-                type="success"
-              >
-                You have successfully registered
-              </v-alert>
-              <v-alert
-                :class="{ alert: alert, 'text-danger': hasError }"
-                color="red"
-                dismissible
-                outlined
-                prominent
-                type="error"
-              >
-                Something went wrong
-              </v-alert>
             </v-card>
           </v-col>
         </v-row>
@@ -349,6 +331,14 @@ export default {
   methods: {
     validate () {
       this.$refs.form.validate()
+    },
+    login () {
+      this.$auth.loginWith('local', {
+        data: {
+          email: this.email,
+          password: this.pass1
+        }
+      })
     }
   }
 }
