@@ -3,7 +3,7 @@
     <v-container>
       <v-row class="align-center">
         <v-col cols="2" class="text-center">
-          <v-btn icon> Discover </v-btn>
+          <v-btn > Discover </v-btn>
         </v-col>
         <v-spacer />
         <v-col cols="4" class="text-center">

@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar />
+    <NavigationDrawer />
     HOME
   </div>
 </template>
