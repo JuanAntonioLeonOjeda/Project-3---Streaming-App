@@ -52,6 +52,9 @@ export default {
   },
 
   auth: {
+    redirect: {
+      home: '/home'
+    },
     strategies: {
       local: {
         token: {
