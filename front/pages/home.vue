@@ -2,6 +2,8 @@
   <div>
     <NavBar />
     <NavigationDrawer />
+    <LiveStreams />
+    <CreateStreamButton />
     HOME
   </div>
 </template>

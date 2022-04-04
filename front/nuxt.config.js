@@ -52,22 +52,14 @@ export default {
   },
 
   auth: {
-    redirect: {
-      home: '/home'
-    },
     strategies: {
       local: {
-        token: {
-          property: 'token',
-          global: true
-          // required: true,
-          // type: 'Bearer'
-        },
         endpoints: {
-          login: { url: '/auth/login', method: 'post' },
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/users/me', method: 'get' }
-        }
+        },
+        tokenType: ''
       }
     }
   },

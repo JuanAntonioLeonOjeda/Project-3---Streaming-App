@@ -3,12 +3,11 @@ const UserModel = require("../models/user.model")
 
 // Authenticate Middleware
 function authUser(req, res, next) {
-    const val_token = req.headers.authorization.split(' ')[1]
     if (!req.headers.authorization) {
         // checks the header for a token
         res.status(403).json({ error: "No Token found" });
     } else {
-        jwt.verify(val_token, process.env.SECRET, (err, token) => {
+        jwt.verify(req.headers.authorization, process.env.SECRET, (err, token) => {
             // takes token + secret phrase
             if (err) {
                 res.status(403).json({ error: "Token not valid" });
