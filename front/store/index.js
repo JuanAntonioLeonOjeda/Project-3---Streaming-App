@@ -13,11 +13,14 @@ export const actions = {
   },
   async liveStreams () {
     const stream = await this.$axios.get('/streams/live')
-    console.log('llega')
     return stream.data
   },
   async createStream () {
     const stream = await this.$axios.post('/streams/me')
     return stream.data
+  },
+  async getAllGenres () {
+    const genres = await this.$axios.get('/genres')
+    return genres.data
   }
 }

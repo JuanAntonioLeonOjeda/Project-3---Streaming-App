@@ -2,6 +2,7 @@
   <v-navigation-drawer
     app
     expand-on-hover
+    clipped
   >
     <v-list>
       <v-list-item class="px-2">
@@ -59,6 +60,17 @@
           <v-icon>mdi-shuffle-variant</v-icon>
         </v-list-item-icon>
         <v-list-item-title>Shuffle</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon>mdi-theme-light-dark</v-icon>
+        </v-list-item-icon>
+        <v-switch
+          v-model="$vuetify.theme.dark"
+          color="secondary"
+          inset
+          persistent-hint
+        />
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
