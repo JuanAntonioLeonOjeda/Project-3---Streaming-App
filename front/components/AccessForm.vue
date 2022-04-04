@@ -183,7 +183,7 @@
                             elevation="2"
                             x-large
                             block
-                            @click="validate"
+                            @click="validate(); signup()"
                           >
                             JOIN
                           </v-btn>
@@ -332,13 +332,23 @@ export default {
     validate () {
       this.$refs.form.validate()
     },
-    login () {
-      this.$auth.loginWith('local', {
+    async login () {
+      await this.$auth.loginWith('local', {
         data: {
           email: this.email,
           password: this.pass1
         }
       })
+    },
+    async signup () {
+      const form = {
+        userName: this.username,
+        email: this.email,
+        password: this.pass1,
+        dateOfBirth: this.date
+      }
+      await this.$store.dispatch('signup', form)
+      this.login()
     }
   }
 }
