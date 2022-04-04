@@ -352,6 +352,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
@@ -379,4 +380,5 @@ h1 {
 .text-danger {
   display: none;
 }
+
 </style>
