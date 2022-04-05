@@ -14,6 +14,8 @@ export default {
   },
   async mounted () {
     const stream = await this.$store.dispatch('liveStreams')
+    // eslint-disable-next-line no-console
+    console.log(stream)
     this.liveStreams = stream
   }
 }

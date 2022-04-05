@@ -28,7 +28,6 @@ async function getLiveStreams(req, res) {
       const streams = await searchStreams(query)
 
       if(!streams.length) return resultMessage(query, res)
-
       res.status(200).json(streams)
     }
   } catch (error) {
@@ -41,8 +40,8 @@ async function searchStreams(query) {
 }
 
 async function resultMessage(query, res) {
-  if(query.hasOwnProperty('genre')) return res.status(404).send(`No live streams available for ${query.genre.name} genre :(`)
-  res.status(404).send('No live streams available :(')
+  if(query.hasOwnProperty('genre')) return res.status(200).send(`No live streams available for ${query.genre.name} genre :(`)
+  res.status(200).send('No live streams available :(')
 }
 
 async function joinStream(req, res) {
@@ -79,7 +78,7 @@ async function increaseTotalViews(stream, user) {
 async function createStream(req, res) {
   try {
     const streamer = res.locals.user
-    if (streamer.live) return res.status(403).send(`Already streaming. Please stop current stream before starting a new one`)
+    if (streamer.live) return res.status(200).send(`Already streaming. Please stop current stream before starting a new one`)
 
     const stream = await StreamModel.create(req.body)
 
@@ -126,7 +125,7 @@ async function stopStream(req, res) {
     const streamer = res.locals.user
     const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, { live: false })
 
-    if(!stream) return res.status(404).send(`You don't have any active streams`)
+    if(!stream) return res.status(204).send(`You don't have any active streams`)
 
     await removeLiveStreamFromGenre(stream)
     await streamerNotLive(streamer)
