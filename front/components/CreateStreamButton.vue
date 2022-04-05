@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn to="/createStream" @click="getIdGenre">
+    <v-btn @click="startStream">
       Start Stream
     </v-btn>
     <v-container fluid>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+const { v4: uuidv4 } = require('uuid')
 export default {
   name: 'CreateStreamButton',
   data () {
@@ -61,10 +62,16 @@ export default {
     }
   },
   methods: {
-    async getIdGenre () {
+    async startStream () {
       const genreId = this.genres.filter(e => e.name === this.genre)
       const stream = await this.$store.dispatch('createStream', genreId[0]._id)
       console.log(stream)
+      const roomId = uuidv4()
+      this.$store.commit('getRoom', roomId)
+      this.$store.commit('changeRole')
+      this.$router.push({
+        path: `/streams/${roomId}`
+      })
     }
   }
 }

@@ -1,9 +1,19 @@
 export const state = () => ({
-
+  roomId: '',
+  role: 'viewer',
+  stream: ''
 })
 
 export const mutations = {
-
+  getRoom (state, id) {
+    state.roomId = id
+  },
+  changeRole (state) {
+    state.role = 'streamer'
+  },
+  getStream (state, video) {
+    state.stream = video
+  }
 }
 
 export const actions = {
