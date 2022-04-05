@@ -13,10 +13,15 @@ export default {
     }
   },
   async mounted () {
-    const stream = await this.$store.dispatch('liveStreams')
-    // eslint-disable-next-line no-console
-    console.log(stream)
-    this.liveStreams = stream
+    try {
+      const stream = await this.$store.dispatch('liveStreams')
+      this.liveStreams = stream
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+  methods: {
+
   }
 }
 </script>

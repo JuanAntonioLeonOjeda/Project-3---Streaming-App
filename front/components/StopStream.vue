@@ -1,7 +1,5 @@
 <template>
-  <div>
-    CREATE UR FUCKING STREAM
-  </div>
+  <div />
 </template>
 
 <script>
