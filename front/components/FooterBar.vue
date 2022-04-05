@@ -1,9 +1,9 @@
 <template>
   <v-footer absolute>
-    <v-container color="deep-purple darken-4">
-      <v-col class="text-center" cols="12">
-        <strong>PeekBeats © All Rights Reserved</strong>
-      </v-col>
+    <v-container>
+      <v-card>
+        <h6 class="text-center">PeekBeats © All Rights Reserved</h6>
+      </v-card>
     </v-container>
   </v-footer>
 </template>

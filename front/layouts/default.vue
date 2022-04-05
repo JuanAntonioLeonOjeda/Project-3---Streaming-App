@@ -5,38 +5,37 @@
       <v-container>
         <Nuxt />
       </v-container>
+      <FooterBar />
     </v-main>
-<<<<<<< HEAD
-    <FooterBar />
-=======
->>>>>>> f6cdf6db545ba35c864b1d871d7a2ffe917e3221
   </v-app>
 </template>
 <script>
+import FooterBar from "~/components/FooterBar.vue"
 export default {
-  name: 'DefaultLayout',
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
+    name: "DefaultLayout",
+    data() {
+        return {
+            clipped: false,
+            drawer: false,
+            fixed: false,
+            items: [
+                {
+                    icon: "mdi-apps",
+                    title: "Welcome",
+                    to: "/"
+                },
+                {
+                    icon: "mdi-chart-bubble",
+                    title: "Inspire",
+                    to: "/inspire"
+                }
+            ],
+            miniVariant: false,
+            right: true,
+            rightDrawer: false,
+            title: "Vuetify.js"
+        };
+    },
+    components: { FooterBar }
 }
 </script>
