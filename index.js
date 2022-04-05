@@ -6,6 +6,9 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const { createServer } = require('http')
+const { Server } = require('socket.io')
+const ExpressPeerServer = require('peer').ExpressPeerServer
 
   ; (async function () {
     try {
@@ -19,6 +22,23 @@ const morgan = require('morgan')
   })()
 
 const app = express()
+const httpServer = createServer(app)
+const io = new Server (httpServer, {
+  cors: {
+    origin:'http://localhost:3000'
+  }
+})
+
+const peerServer = ExpressPeerServer(httpServer, {
+  debug: true
+})
+
+io.on('connection', (socket) => {
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId)
+    socket.to(roomId).emit('user-connected', userId)
+  })
+})
 
 try {
   app
@@ -26,12 +46,13 @@ try {
     .use(morgan('dev'))
     .use(express.json())
     .use(express.static('public'))
+    .use('/peerjs', peerServer)
     .use('/api', require('./api/routes'))
 
-    .listen(process.env.PORT, () => {
-      console.info('💻 Reboot Server Live')
-      console.info(`📡 PORT: http://localhost:${process.env.PORT}`)
-    })
+  httpServer.listen(process.env.PORT, () => {
+    console.info('💻 Reboot Server Live')
+    console.info(`📡 PORT: http://localhost:${process.env.PORT}`)
+  })
 } catch (error) {
   throw new Error(`Can't start Express: ${error}`)
 }
