@@ -12,11 +12,17 @@ export const actions = {
     return res.data
   },
   async liveStreams () {
-    const stream = await this.$axios.get('/streams/live')
-    return stream.data
+    try {
+      const streamStore = await this.$axios.get('/streams/live')
+      return streamStore.data
+    } catch (error) {
+      throw new Error(error)
+    }
   },
-  async createStream () {
-    const stream = await this.$axios.post('/streams/me')
+  async createStream (state, id) {
+    const stream = await this.$axios.post('/streams/me', {
+      genre: id
+    })
     return stream.data
   },
   async getAllGenres () {

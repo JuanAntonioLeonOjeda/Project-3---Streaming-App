@@ -41,8 +41,8 @@ async function searchStreams(query) {
 }
 
 async function resultMessage(query, res) {
-  if(query.hasOwnProperty('genre')) return res.status(404).send(`No live streams available for ${query.genre.name} genre :(`)
-  res.status(404).send('No live streams available :(')
+  if(query.hasOwnProperty('genre')) return res.status(200).send(`No live streams available for ${query.genre.name} genre :(`)
+  res.status(200).send('No live streams available :(')
 }
 
 async function joinStream(req, res) {

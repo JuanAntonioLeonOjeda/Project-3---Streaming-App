@@ -82,10 +82,10 @@ export default {
   data () {
     return {
       isLoading: false,
-      // items: [],
-      // model: null,
-      // search: null,
-      // tab: null,
+      items: [],
+      model: null,
+      search: null,
+      tab: null,
       genres: []
     }
   },
