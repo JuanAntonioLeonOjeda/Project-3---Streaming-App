@@ -4,7 +4,7 @@ const GenreModel = require('../models/genre.model')
 
 async function getAllStreams(req, res) {
   try {
-    const streams = await StreamModel.find({}, { currentViewers: 0, quality: 0 })
+    const streams = await StreamModel.find({}, { currentViewers: 0, quality: 0 }).populate('streamer', 'email')
 
     res.status(200).json(streams)
   } catch (error) {
@@ -37,6 +37,8 @@ async function getLiveStreams(req, res) {
 
 async function searchStreams(query) {
   return await StreamModel.find(query, { quality: 0 })
+    .populate('streamer', 'userName')
+    .populate('genre', 'name')
 }
 
 async function resultMessage(query, res) {
@@ -110,7 +112,7 @@ async function createStream(req, res) {
 async function updateStream(req, res) {
   try {
     const streamer = res.locals.user
-    const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, { description: req.body.description })
+    const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, req.body, { new: true } )
 
     if(!stream) return res.status(404).send('No active stream available')
 
@@ -125,7 +127,7 @@ async function stopStream(req, res) {
     const streamer = res.locals.user
     const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, { live: false })
 
-    if(!stream) return res.status(204).send(`You don't have any active streams`)
+    if(!stream) return res.status(200).send(`You don't have any active streams`)
 
     await removeLiveStreamFromGenre(stream)
     await streamerNotLive(streamer)

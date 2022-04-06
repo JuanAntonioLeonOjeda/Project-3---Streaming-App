@@ -44,6 +44,9 @@ const streamSchema = new mongoose.Schema({
   live: {
     type: Boolean,
     default: true
+  },
+  room: {
+    type: String
   }
 })
 

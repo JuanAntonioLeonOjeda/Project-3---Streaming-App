@@ -1,7 +1,9 @@
 <template>
   <div>
-    CREATE UR FUCKING STREAM
-    {{ roomId }}
+    Your stream room is: {{ roomId }}
+    <v-btn color="error" @click="stopStream">
+      Stop Stream
+    </v-btn>
   </div>
 </template>
 
@@ -11,6 +13,12 @@ export default {
   data () {
     return {
       roomId: this.$route.params.id
+    }
+  },
+  methods: {
+    async stopStream () {
+      await this.$store.dispatch('stopStream')
+      this.$router.push({ path: '/home' })
     }
   }
 }
