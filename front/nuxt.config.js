@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
+  target: 'static',
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - peek-beats-front',
@@ -55,7 +58,8 @@ export default {
     sockets: [
       {
         name: 'test',
-        url: 'http://localhost:5000/'
+        // url: 'http://localhost:5000/'
+        url: 'https://peek-beats.herokuapp.com/'
       }
     ],
     server: {
@@ -68,7 +72,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:5000/api'
+    // baseURL: 'http://localhost:5000/api'
+    baseURL: 'https://peek-beats.herokuapp.com/api'
   },
 
   auth: {
@@ -110,5 +115,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     publicPath: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js/_nuxt/'
+  },
+
+  generate: {
+    fallback: true
   }
 }
