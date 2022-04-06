@@ -25,7 +25,7 @@ const app = express()
 const httpServer = createServer(app)
 const io = new Server (httpServer, {
   cors: {
-    origin:'https://peek-beats.netlify.app/'
+    origin:'https://peek-beats.netlify.app/home'
   }
 })
 
