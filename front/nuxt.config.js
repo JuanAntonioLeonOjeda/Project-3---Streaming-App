@@ -16,6 +16,9 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js' }
     ]
   },
 
@@ -43,8 +46,24 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    'nuxt-socket-io'
   ],
+
+  io: {
+    // Options
+    sockets: [
+      {
+        name: 'test',
+        url: 'http://localhost:5000/'
+      }
+    ],
+    server: {
+      cors: {
+        origin: 'http://localhost:3000/'
+      }
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -90,5 +109,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    publicPath: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js/_nuxt/'
   }
 }

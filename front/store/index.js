@@ -1,7 +1,7 @@
 export const state = () => ({
   roomId: '',
   role: 'viewer',
-  stream: '',
+  streamVideo: '',
   streamInfo: {}
 })
 
@@ -13,7 +13,7 @@ export const mutations = {
     state.role = 'streamer'
   },
   getStream (state, video) {
-    state.stream = video
+    state.streamVideo = video
   },
   getStreamInfo (state, info) {
     state.streamInfo = info

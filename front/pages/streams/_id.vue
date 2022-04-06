@@ -1,6 +1,7 @@
 <template>
   <div>
     Your stream room is: {{ roomId }}
+    <StreamVideo />
     <v-btn color="error" @click="stopStream">
       Stop Stream
     </v-btn>
