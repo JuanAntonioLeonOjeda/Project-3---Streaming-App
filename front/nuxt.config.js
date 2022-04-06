@@ -64,7 +64,7 @@ export default {
     ],
     server: {
       cors: {
-        origin: 'http://localhost:3000/'
+        origin: 'https://peek-beats.netlify.app/'
       }
     }
   },
