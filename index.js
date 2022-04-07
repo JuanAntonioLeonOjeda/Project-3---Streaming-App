@@ -25,7 +25,7 @@ const app = express()
 const httpServer = createServer(app)
 const io = new Server (httpServer, {
   cors: {
-    origin:'https://peek-beats.netlify.app'
+    origin:'https://peek-beats-front.herokuapp.com'
   }
 })
 
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 
 try {
   app
-    .use(cors({ origin: 'https://peek-beats.netlify.app' }))
+    .use(cors({ origin: 'https://peek-beats-front.herokuapp.com' }))
     .use(morgan('dev'))
     .use(express.json())
     .use(express.static('public'))
