@@ -29,6 +29,11 @@ const io = new Server (httpServer, {
   }
 })
 
+io.on("hello", (arg, callback) => {
+  console.log(arg); // "world"
+  callback("got it");
+});
+
 const peerServer = ExpressPeerServer(httpServer, {
   debug: true
 })
