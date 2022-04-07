@@ -15,9 +15,16 @@
                     >
                       <v-card-text class="white--text mt-12">
                         <h1 class="text-center">
+                          Welcome to a place where you choose what you fancy to hear
+                        </h1>
+                      </v-card-text>
+
+                      <v-divider class="mt-3 mb-3" dark />
+
+                      <v-card-text class="white--text mt-12">
+                        <h1 class="text-center">
                           Already a Peek?
                         </h1>
-                        <v-divider class="mt-3 mb-3" dark />
                       </v-card-text>
                       <div class="text-center">
                         <v-btn
@@ -360,7 +367,9 @@ export default {
   font-family: "Cormorant", serif;
 }
 h1 {
-  font-size: calc(1vw + 1vh + 2.5vmin);
+  font-size: calc(1vw + 1vh + 1.5vmin);
+  line-height: 80%;
+  padding: 10px;
 }
 .newTo {
   background-image: url("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?cs=srgb&dl=pexels-c%C3%A1tia-matos-1072179.jpg&fm=jpg");

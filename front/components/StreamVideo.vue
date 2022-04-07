@@ -44,7 +44,6 @@ export default {
       if (this.$store.state.role === 'streamer') {
         const stream = this.$store.state.streamVideo
         connectToNewUser(userId, stream, peer)
-        console.log(peer)
       }
     })
   }
