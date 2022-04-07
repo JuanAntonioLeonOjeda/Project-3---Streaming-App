@@ -2,9 +2,7 @@
   <div>
     Your stream room is: {{ roomId }}
     <StreamVideo />
-    <v-btn color="error" @click="stopStream">
-      Stop Stream
-    </v-btn>
+    <StopStream v-if="role === 'streamer'" />
   </div>
 </template>
 
@@ -13,13 +11,8 @@ export default {
   name: 'StreamPage',
   data () {
     return {
-      roomId: this.$route.params.id
-    }
-  },
-  methods: {
-    async stopStream () {
-      await this.$store.dispatch('stopStream')
-      this.$router.push({ path: '/home' })
+      roomId: this.$route.params.id,
+      role: this.$store.state.role
     }
   }
 }
