@@ -39,6 +39,14 @@ const peerServer = ExpressPeerServer(httpServer, {
 })
 
 io.on('connection', (socket) => {
+  console.log('client connected')
+  io.on("hello", (arg, callback) => {
+    console.log(arg); // "world"
+    callback("got it");
+  });
+  socket.on('disconnect', () => {
+    console.log('client disconnected')
+  })
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
     socket.to(roomId).emit('user-connected', userId)
