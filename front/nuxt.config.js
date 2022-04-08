@@ -111,5 +111,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     publicPath: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js/_nuxt/'
+  },
+
+  generate: {
+    fallback: true
   }
 }
