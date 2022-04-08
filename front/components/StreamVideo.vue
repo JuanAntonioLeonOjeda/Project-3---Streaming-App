@@ -11,10 +11,16 @@ export default {
     }
   },
   mounted () {
-    const peer = new Peer(undefined, {
+    // const peer = new Peer(undefined, {
+    //   path: '/peerjs',
+    //   host: '/',
+    //   port: 5000
+    // })
+
+    this.$peer.connect(undefined, {
       path: '/peerjs',
       host: '/',
-      port: 5000
+      port: 443
     })
 
     this.socket = this.$nuxtSocket({
@@ -30,10 +36,10 @@ export default {
         addStream(stream)
       })
     } else {
-      watchStream(peer)
+      watchStream(this.$peer)
     }
 
-    peer.on('open', (id) => {
+    this.$peer.on('open', function (id) {
       // eslint-disable-next-line no-console
       console.log(`myId: ${id}`)
       this.socket.emit('join-room', this.$route.params.id, id)
@@ -43,7 +49,7 @@ export default {
       console.log(`User ${userId} connected`)
       if (this.$store.state.role === 'streamer') {
         const stream = this.$store.state.streamVideo
-        connectToNewUser(userId, stream, peer)
+        connectToNewUser(userId, stream, this.$peer)
       }
     })
   }
