@@ -7,7 +7,7 @@ export default {
   name: 'StreamVideo',
   data () {
     return {
-
+      id: Math.random(1 - 1000)
     }
   },
   mounted () {
@@ -16,12 +16,6 @@ export default {
     //   host: '/',
     //   port: 5000
     // })
-
-    this.$peer.connect(undefined, {
-      path: '/peerjs',
-      host: '/',
-      port: 443
-    })
 
     this.socket = this.$nuxtSocket({
       name: 'stream'
@@ -39,18 +33,34 @@ export default {
       watchStream(this.$peer)
     }
 
-    this.$peer.on('open', function (id) {
-      // eslint-disable-next-line no-console
-      console.log(`myId: ${id}`)
-      this.socket.emit('join-room', this.$route.params.id, id)
+    // dataConnection.on('open', function (id) {
+    //   console.log(dataConnection)
+    //   // eslint-disable-next-line no-console
+    //   console.log(`myId: ${id}`)
+    //   this.socket.emit('join-room', this.$route.params.id, id)
+    // })
+
+    this.socket.on('connection', () => {
+      const dataConnection = this.$peer.connect(undefined, {
+        path: '/peerjs',
+        host: '/',
+        port: 443
+      })
+      console.log(dataConnection)
+      this.socket.emit('join-room', this.$route.params.id, this.socket.id)
+      console.log('user connected: ' + this.socket.id)
     })
 
     this.socket.on('user-connected', (userId) => {
       console.log(`User ${userId} connected`)
       if (this.$store.state.role === 'streamer') {
         const stream = this.$store.state.streamVideo
-        connectToNewUser(userId, stream, this.$peer)
+        connectToNewUser(userId, stream, this.socket)
       }
+    })
+
+    this.socket.on('stream', (stream) => {
+      console.log(stream)
     })
   }
 }
@@ -78,12 +88,17 @@ const watchStream = (peer) => {
   })
 }
 
-const connectToNewUser = (userId, stream, peer) => {
+const connectToNewUser = (userId, stream, socket) => {
   // eslint-disable-next-line no-console
-  peer.call(userId, stream)
-  peer.on('error', (error) => {
-    console.log(`Peer error: ${error}`)
-  })
+  console.log('connecting to ' + userId + '...')
+  socket.emit('stream', userId, stream)
+  // socket.on('stream', (userId, stream) => {
+  //   socket.to(userId).emit('stream', streamerId, stream)
+  // })
+  console.log('enviado')
+  // peer.on('error', (error) => {
+  //   console.log(`Peer error: ${error}`)
+  // })
 }
 
 </script>
