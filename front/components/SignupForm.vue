@@ -1,7 +1,6 @@
 <template>
   <div class="font">
-    <v-row>
-      <v-col
+    <!-- <v-col
         cols="12"
         md="5"
         class="alreadyOn deep-purple darken-2"
@@ -32,169 +31,191 @@
             LogIn
           </v-btn>
         </div>
-      </v-col>
-      <v-col cols="12" md="7">
-        <v-card-text class="mt-12">
-          <h1 class="text-center teal--text text--accent-2">
-            PeekBeats
-          </h1>
-          <v-divider class="mt-3 mb-3" dark />
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="username"
-              background-color="blue-grey darken-2"
-              dark
-              color="white"
-              outlined
-              :counter="10"
-              :rules="usernameRules"
-              label="Username"
-              prepend-inner-icon="mdi-form-textbox"
-              required
-            />
-            <v-text-field
-              v-model="email"
-              background-color="blue-grey darken-2"
-              dark
-              color="white"
-              outlined
-              :rules="emailRules"
-              label="E-mail"
-              prepend-inner-icon="mdi-at"
-              required
-            />
-            <v-text-field
-              v-model="pass1"
-              background-color="blue-grey darken-2"
-              dark
-              color="white"
-              hint="At least 8 characters"
-              counter
-              :rules="passwordRules"
-              outlined
-              :type="passVisible ? 'text' : 'password'"
-              label="Password"
-              prepend-inner-icon="mdi-onepassword"
-              :append-icon="
-                passVisible
-                  ? 'mdi-eye-outline'
-                  : 'mdi-eye-off-outline'
-              "
-              @click:append="passVisible = !passVisible"
-            />
-            <v-text-field
-              v-model="pass2"
-              background-color="blue-grey darken-2"
-              dark
-              color="white"
-              hint="At least 8 characters"
-              counter
-              :rules="passwordRules.concat(passwordConfirmationRule)"
-              outlined
-              :type="passVisible1 ? 'text' : 'password'"
-              label="Confirm password"
-              prepend-inner-icon="mdi-onepassword"
-              :append-icon="
-                passVisible1
-                  ? 'mdi-eye-outline'
-                  : 'mdi-eye-off-outline'
-              "
-              @click:append="passVisible1 = !passVisible1"
-            />
-            <v-row>
-              <v-col cols="6" sm="6" md="6">
-                <v-dialog
-                  ref="dialog"
-                  v-model="modal"
-                  :return-value.sync="date"
-                  persistent
-                  width="290px"
-                >
-                  <template #activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="date"
-                      dark
-                      color="white"
-                      label="Birthday"
-                      prepend-icon="mdi-cake-variant-outline"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                    />
-                  </template>
-                  <v-date-picker v-model="date" scrollable>
-                    <v-spacer />
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="modal = false"
-                    >
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="$refs.dialog.save(date)"
-                    >
-                      OK
-                    </v-btn>
-                  </v-date-picker>
-                </v-dialog>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col
-                cols="12"
-                sm="7"
-                md="7"
+      </v-col> -->
+    <v-col cols="12" md="12" class="formularios">
+      <v-card-text>
+        <h1 class="teal--text text--accent-2">
+          <p>
+            Create an account
+          </p>
+        </h1>
+        <v-divider
+          class="
+              mt-3
+              mb-4"
+          dark
+        />
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field
+            v-model="username"
+            background-color="blue-grey darken-2"
+            dark
+            color="white"
+            outlined
+            :counter="10"
+            :rules="usernameRules"
+            label="Username"
+            prepend-inner-icon="mdi-form-textbox"
+            required
+            autocomplete="username"
+          />
+          <v-text-field
+            v-model="email"
+            background-color="blue-grey darken-2"
+            dark
+            color="white"
+            outlined
+            :rules="emailRules"
+            label="E-mail"
+            prepend-inner-icon="mdi-at"
+            required
+            autocomplete="username email"
+          />
+          <v-text-field
+            v-model="pass1"
+            background-color="blue-grey darken-2"
+            dark
+            color="white"
+            hint="At least 8 characters"
+            counter
+            :rules="passwordRules"
+            outlined
+            :type="passVisible ? 'text' : 'password'"
+            label="Password"
+            prepend-inner-icon="mdi-onepassword"
+            :append-icon="
+              passVisible
+                ? 'mdi-eye-outline'
+                : 'mdi-eye-off-outline'
+            "
+            autocomplete="new-password"
+            @click:append="passVisible = !passVisible"
+          />
+          <v-text-field
+            v-model="pass2"
+            background-color="blue-grey darken-2"
+            dark
+            color="white"
+            hint="At least 8 characters"
+            counter
+            :rules="passwordRules.concat(passwordConfirmationRule)"
+            outlined
+            :type="passVisible1 ? 'text' : 'password'"
+            label="Confirm password"
+            prepend-inner-icon="mdi-onepassword"
+            :append-icon="
+              passVisible1
+                ? 'mdi-eye-outline'
+                : 'mdi-eye-off-outline'
+            "
+            autocomplete="new-password"
+            @click:append="passVisible1 = !passVisible1"
+          />
+          <v-row>
+            <v-col cols="6" sm="6" md="6">
+              <v-dialog
+                ref="dialog"
+                v-model="modal"
+                :return-value.sync="date"
+                persistent
+                width="290px"
               >
-                <v-checkbox
-                  v-model="checkbox"
-                  color="white"
-                  dark
-                  :rules="[
-                    (v) =>
-                      !!v ||
-                      'You must agree the Terms and Conditions to continue!',
-                  ]"
-                  label="Terms and Conditions"
-                  required
-                />
-              </v-col>
-              <v-col
-                cols="12"
-                sm="5"
-                md="5"
-              >
-                <v-checkbox
-                  color="white"
-                  dark
-                  label="Mailing List"
-                  required
-                />
-              </v-col>
-            </v-row>
-            <v-divider dark />
-            <v-btn
-              :disabled="!valid"
-              class="mt-5"
-              color="teal accent-2"
-              outlined
-              elevation="2"
-              x-large
-              block
-              @click="validate(); signup()"
+                <template #activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    dark
+                    color="white"
+                    label="Birthday"
+                    prepend-icon="mdi-cake-variant-outline"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  />
+                </template>
+                <v-date-picker v-model="date" scrollable>
+                  <v-spacer />
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="modal = false"
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.dialog.save(date)"
+                  >
+                    OK
+                  </v-btn>
+                </v-date-picker>
+              </v-dialog>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="7"
+              md="7"
             >
-              SignUp
-            </v-btn>
-          </v-form>
-        </v-card-text>
-      </v-col>
-    </v-row>
+              <v-checkbox
+                v-model="checkbox"
+                color="white"
+                dark
+                :rules="[
+                  (v) =>
+                    !!v ||
+                    'You must agree the Terms and Conditions to continue!',
+                ]"
+                label="Terms and Conditions"
+                required
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              sm="5"
+              md="5"
+            >
+              <v-checkbox
+                color="white"
+                dark
+                label="Mailing List"
+                required
+              />
+            </v-col>
+          </v-row>
+          <v-divider class="mb-5" dark />
+          <div>
+            <h3 class="white--text">
+              <p>
+                Already have an account?
+                <a
+                  class="text-decoration-none teal--text"
+                  @click="stepChanger"
+                > LOG IN </a>
+              </p>
+            </h3>
+          </div>
+          <v-btn
+            :disabled="!valid"
+            class="mt-5"
+            color="teal accent-2"
+            outlined
+            elevation="2"
+            x-large
+            block
+            @click="validate(); signup()"
+          >
+            SignUp
+          </v-btn>
+        </v-form>
+      </v-card-text>
+    </v-col>
   </div>
 </template>
 
 <script>
+
 export default {
   props: {
   },
@@ -225,26 +246,22 @@ export default {
       .toISOString()
       .substr(0, 10),
 
+    checkbox: false,
     menu: false,
     modal: false,
     menu2: false,
     passVisible: false,
-    passVisible1: false,
-    alert: true,
-    noError: true,
-    hasError: true
+    passVisible1: false
   }),
   computed: {
     passwordConfirmationRule () {
       return () => this.pass1 === this.pass2 || 'Password must match'
     }
   },
-  mounted () {
-  },
 
   methods: {
     stepChanger () {
-      this.$store.commit('stepChanger', 2)
+      this.$store.commit('stepChanger', 1)
     },
     validate () {
       this.$refs.form.validate()
@@ -273,30 +290,15 @@ export default {
 </script>
 
 <style scoped>
-.font {
-  font-family: "Cormorant", serif;
-}
-h1 {
-  font-size: calc(1vw + 1vh + 2.5vmin);
-  line-height: 80%;
-  padding: 10px;
-}
-.newTo {
-  background-image: url("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?cs=srgb&dl=pexels-c%C3%A1tia-matos-1072179.jpg&fm=jpg");
-  background-size: 1000px 1000px;
-}
 .alreadyOn {
-  background-image: url("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?cs=srgb&dl=pexels-c%C3%A1tia-matos-1072179.jpg&fm=jpg");
-  background-size: 1000px 1000px;
+  z-index: 1;
+  background-image: url("../static/cassette-blur.jpg");
+  background-size: cover;
+  background-position: center;
 }
-.alert {
-  width: 70%;
-  margin: 10px auto;
-}
-.text-success {
-  display: none;
-}
-.text-danger {
-  display: none;
-}
+/* .formularios {
+  background-image: url("https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
+} */
 </style>

@@ -2,18 +2,37 @@
   <v-app>
     <v-main>
       <v-container class="mt-5 fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="8">
-            <v-card elevation="5" class="blue-grey darken-3 accent-2">
+        <v-row class="main-row">
+          <v-col
+            cols="12"
+            md="4"
+            offset-md="2"
+          >
+            <v-card elevation="5" class="main-card blue-grey darken-3 accent-2" width="100%">
               <v-window v-model="$store.state.stepChange">
-                <v-window-item :value="1">
+                <v-window-item :value="2">
                   <SignupForm />
                 </v-window-item>
-                <v-window-item :value="2">
+                <v-window-item :value="1">
                   <LoginForm />
                 </v-window-item>
               </v-window>
             </v-card>
+          </v-col>
+          <v-col
+            cols="12"
+            md="2"
+            offset-md="4"
+            class="align-item-baseline"
+          >
+            <div class="align-self-baseline">
+              <v-img
+                lazy-src="require(../static/lorologo-removebg-preview.png)"
+                max-height="350"
+                max-width="450"
+                :src="require('../static/lorologo-removebg-preview.png')"
+              />
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -23,10 +42,27 @@
 
 <script>
 export default {
+  name: 'AccessForm',
   data () {
     return {
-      name: 'AccessForm'
     }
   }
 }
 </script>
+
+<style scoped>
+#app {
+  background-image: url("https://images.pexels.com/photos/92083/pexels-photo-92083.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+.main-card {
+ padding: 25px;
+}
+v-card {
+  margin: 10;
+}
+.main-row {
+  height:850px;
+}
+</style>
