@@ -4,7 +4,7 @@
     dark
     app
     clipped-left
-    elevation="20"
+    elevation="2"
     rounded
   >
     <v-container>
