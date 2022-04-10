@@ -2,7 +2,8 @@ export const state = () => ({
   roomId: '',
   role: 'viewer',
   streamVideo: '',
-  streamInfo: {}
+  streamInfo: {},
+  genreId: ''
 })
 
 export const mutations = {
@@ -17,6 +18,9 @@ export const mutations = {
   },
   getStreamInfo (state, info) {
     state.streamInfo = info
+  },
+  saveGenre (state, genre) {
+    state.genreId = genre
   }
 }
 
@@ -58,5 +62,9 @@ export const actions = {
   async assignStreamRoom (state, roomId) {
     const stream = await this.$axios.put('/streams/me', { room: roomId })
     return stream.data
+  },
+  async getTopFive () {
+    const top5 = await this.$axios.get('/users/top')
+    return top5.data
   }
 }

@@ -13,7 +13,7 @@
           <v-btn> Discover </v-btn>
         </v-col>
         <v-spacer />
-        <v-icon>mdi-heart</v-icon>
+        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
         <v-col cols="2">
           <v-toolbar-title>Peek Beats</v-toolbar-title>
         </v-col>
@@ -97,4 +97,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.logo {
+  height: 50px;
+  width: 50px;
+}
 </style>

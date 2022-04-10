@@ -1,36 +1,43 @@
 <template>
-  <div>
+  <div class="mt-20">
     <div>
-      <client-only placeholder="Loading...">
-        <div v-if="typeof liveStreams === 'string'">
-          {{ liveStreams }}
-        </div>
-        <div v-else-if="loading" class="progress">
-          <v-progress-circular indeterminate :size="100" color="green" />
-        </div>
-        <div v-else-if="liveStreams.length !== 0">
-          Current Streams: {{ liveStreams.length }}
-          <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5">
-            <slide v-for="(stream, idx) in liveStreams" :key="idx" :index="idx">
-              <span class="title">Author: {{ stream.streamer.userName }}</span>
-              <p>Genre: {{ stream.genre.name }}</p>
-              <p>Current Viewers: {{ stream.currentViewers.length }}</p>
-              <p>Likes: {{ stream.likes.length }}</p>
-              <p>{{ stream.description }}</p>
-              <v-btn
-                class="ml-2 mt-5"
-                outlined
-                rounded
-                small
-                @click="joinStream(stream._id)"
-              >
-                <v-icon>mdi-play</v-icon>
-                WATCH STREAM
-              </v-btn>
-            </slide>
-          </carousel-3d>
-        </div>
-      </client-only>
+      <div v-if="typeof liveStreams === 'string'">
+        {{ liveStreams }}
+      </div>
+      <div v-else-if="loading" class="progress">
+        <div class="spacer" />
+        <LoadingAnimation />
+      </div>
+      <div v-else-if="liveStreams.length !== 0" class="text-center">
+        Current Streams: {{ liveStreams.length }}
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5">
+          <slide v-for="(stream, idx) in liveStreams" :key="idx" :index="idx" class="slide" position="relative">
+            <span class="title">Author: {{ stream.streamer.userName }}</span>
+            <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+            <p>Genre: {{ stream.genre.name }}</p>
+            <p>Current Viewers: {{ stream.currentViewers.length }}</p>
+            <p>Likes: {{ stream.likes.length }}</p>
+            <p>{{ stream.description }}</p>
+            <v-container>
+              <v-row>
+                <v-col>
+                  <div class="text-center">
+                    <v-btn
+                      outlined
+                      rounded
+                      small
+                      @click="joinStream(stream._id)"
+                    >
+                      <v-icon>mdi-play</v-icon>
+                      WATCH STREAM
+                    </v-btn>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </slide>
+        </carousel-3d>
+      </div>
     </div>
   </div>
 </template>
@@ -74,8 +81,18 @@ export default {
     .title { font-size: 22px; }
   }
 }
+.logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+.slide {
+  background-image: url('../static/headphones_1.jpg');
+  background-position: right -35px top;
+}
 </style>
-
       // <v-card max-width="400" class="mx-auto">
       //   <v-container>
       //     <v-row dense>
