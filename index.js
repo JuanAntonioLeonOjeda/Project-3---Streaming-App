@@ -40,9 +40,7 @@ io.on('connection', (socket) => {
     socket.to(roomId).emit('user-connected', userId)
   })
   socket.on('stream', (userId, stream) => {
-    console.log('dentro')
     socket.broadcast.emit('content', userId, stream)
-    console.log(stream)
   })
 })
 

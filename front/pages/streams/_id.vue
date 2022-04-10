@@ -18,7 +18,7 @@
                   mdi-account-group
                 </v-icon>
                 <span v-if="stream.currentViewers !== []">
-                  {{ stream.currentViewers.length }}
+                  {{ getTotalViewers }}
                 </span>
                 <span v-else>
                   0
@@ -73,6 +73,11 @@ export default {
       stream: this.$store.state.streamInfo,
       genre: '',
       like: false
+    }
+  },
+  computed: {
+    getTotalViewers () {
+      return this.stream.currentViewers.length
     }
   },
   async mounted () {
