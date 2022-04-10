@@ -12,6 +12,7 @@ export default {
   methods: {
     async stopStream () {
       await this.$store.dispatch('stopStream')
+      this.$store.commit('changeRole')
       this.$router.push({ path: '/home' })
     }
   }

@@ -67,6 +67,8 @@ export default {
   methods: {
     async joinStream (streamId) {
       const stream = await this.$store.dispatch('joinStream', streamId)
+      this.$store.state.streamInfo = stream
+      console.log(stream)
       this.$router.push({ path: `/streams/${stream.room}` })
     }
   }

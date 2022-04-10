@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="deep-purple accent-4"
+    color="#565EE8"
     dark
     app
     clipped-left
