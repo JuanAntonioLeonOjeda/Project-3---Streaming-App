@@ -1,9 +1,10 @@
 export const state = () => ({
   roomId: '',
-  role: 'viewer',
+  streamer: false,
   streamVideo: '',
   streamInfo: {},
-  stepChange: 1
+  stepChange: 1,
+  genreId: ''
 })
 
 export const mutations = {
@@ -14,13 +15,16 @@ export const mutations = {
     state.roomId = id
   },
   changeRole (state) {
-    state.role = 'streamer'
+    state.streamer = !state.streamer
   },
   getStream (state, video) {
     state.streamVideo = video
   },
   getStreamInfo (state, info) {
     state.streamInfo = info
+  },
+  saveGenre (state, genre) {
+    state.genreId = genre
   }
 }
 
@@ -47,6 +51,10 @@ export const actions = {
     const genres = await this.$axios.get('/genres')
     return genres.data
   },
+  async getGenre (state, genreId) {
+    const genre = await this.$axios.get(`/genres/${genreId}`)
+    return genre.data
+  },
   async stopStream () {
     const stream = await this.$axios.put('/streams/me/stop')
     return stream.data
@@ -55,6 +63,10 @@ export const actions = {
     const userName = await this.$axios.get('/users/me')
     return userName.data
   },
+  async getOneUser (state, userId) {
+    const user = await this.$axios.get(`/users/${userId}`)
+    return user.data
+  },
   async joinStream (state, id) {
     const stream = await this.$axios.get(`/streams/${id}`)
     return stream.data
@@ -62,5 +74,13 @@ export const actions = {
   async assignStreamRoom (state, roomId) {
     const stream = await this.$axios.put('/streams/me', { room: roomId })
     return stream.data
+  },
+  async getTopFive () {
+    const top5 = await this.$axios.get('/users/top')
+    return top5.data
+  },
+  async addFavouriteStreamer (state, streamerId) {
+    const streamer = await this.$axios.post(`/users/me/favoriteStreamers/${streamerId}`)
+    return streamer.data
   }
 }

@@ -2,8 +2,10 @@
   <div>
     <NavBar />
     <NavigationDrawer />
-    <LiveStreams />
     <CreateStreamButton />
+    <GenreSelect />
+    <LiveStreams />
+    <TopFive />
   </div>
 </template>
 

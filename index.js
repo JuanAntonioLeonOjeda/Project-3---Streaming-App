@@ -34,9 +34,13 @@ const peerServer = ExpressPeerServer(httpServer, {
 })
 
 io.on('connection', (socket) => {
+  socket.emit('connection', socket.id)
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
     socket.to(roomId).emit('user-connected', userId)
+  })
+  socket.on('stream', (userId, stream) => {
+    socket.broadcast.emit('content', userId, stream)
   })
 })
 

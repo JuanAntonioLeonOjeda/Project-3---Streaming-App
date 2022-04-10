@@ -50,7 +50,7 @@ async function joinStream(req, res) {
   try {
     const user = res.locals.user
     const stream = await StreamModel.findById(req.params.id)
-
+    console.log(stream.room)
     if(!stream.live) return res.status(404).send('This stream has ended')
 
     addCurrentViewer(stream, user)
@@ -113,7 +113,7 @@ async function updateStream(req, res) {
   try {
     const streamer = res.locals.user
     const stream = await StreamModel.findOneAndUpdate({ streamer: streamer.id, live: true }, req.body, { new: true } )
-
+    
     if(!stream) return res.status(404).send('No active stream available')
 
     res.status(200).json({ message: 'Stream updated', stream })
