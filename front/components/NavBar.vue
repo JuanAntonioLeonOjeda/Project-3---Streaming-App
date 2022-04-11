@@ -7,7 +7,22 @@
     elevation="2"
     rounded
   >
-    <v-container v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly">
+    <v-container v-if="$vuetify.breakpoint.xsOnly">
+      <v-row class="align-center">
+        <!-- <v-col cols="2" class="text-center">
+          <v-btn text>
+            Discover
+          </v-btn>
+        </v-col>
+        <v-spacer /> -->
+        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <v-spacer />
+        <v-btn icon>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+      </v-row>
+    </v-container>
+    <v-container v-else-if="$vuetify.breakpoint.smOnly">
       <v-row class="align-center">
         <v-col cols="2" class="text-center">
           <v-btn text>

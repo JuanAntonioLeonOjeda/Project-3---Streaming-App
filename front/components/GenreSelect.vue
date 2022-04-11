@@ -5,22 +5,24 @@
         cols="12"
       >
         <div class="text-center">
-          <p class="mb-0">What music genre are you streming?</p>
+          <h2 class="mb-0">
+            What music genre are you streaming?
+          </h2>
         </div>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="6">
         <v-select
-          class="mt-0"
           v-model="genre"
+          class="mt-0"
           :items="genres"
           label="Choose stream's music genre"
           item-text="name"
         />
       </v-col>
     </v-row>
-        <!-- <v-select
+    <!-- <v-select
             v-model="genre"
             :items="genres"
             label="Tags"

@@ -3,7 +3,13 @@
     <v-row>
       <v-col offset="4" cols="4">
         <div class="text-center">
-          <v-btn class="mt-20" color="secondary" @click="startStream" block>
+          <v-btn
+            color="#565EE8"
+            x-large
+            block
+            class="mt-20"
+            @click="startStream"
+          >
             Start Stream
           </v-btn>
         </div>
