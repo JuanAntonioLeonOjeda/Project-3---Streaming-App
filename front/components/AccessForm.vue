@@ -2,6 +2,15 @@
   <v-app>
     <v-main>
       <v-container class="mt-5 fill-height" fluid>
+        <div class="loroLogo">
+          <v-spacer />
+          <v-img
+            lazy-src="require(../static/lorologo-removebg-preview.png)"
+            height="350"
+            width="450"
+            :src="require('../static/lorologo-removebg-preview.png')"
+          />
+        </div>
         <v-row class="main-row">
           <v-col
             cols="12"
@@ -18,21 +27,6 @@
                 </v-window-item>
               </v-window>
             </v-card>
-          </v-col>
-          <v-col
-            cols="12"
-            md="2"
-            offset-md="4"
-            class="align-item-baseline"
-          >
-            <div class="align-self-baseline">
-              <v-img
-                lazy-src="require(../static/lorologo-removebg-preview.png)"
-                max-height="350"
-                max-width="450"
-                :src="require('../static/lorologo-removebg-preview.png')"
-              />
-            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -52,6 +46,7 @@ export default {
 
 <style scoped>
 #app {
+  position: relative;
   background-image: url("https://images.pexels.com/photos/92083/pexels-photo-92083.jpeg");
   background-size: cover;
   background-position: center;
@@ -62,7 +57,9 @@ export default {
 v-card {
   margin: 10;
 }
-.main-row {
-  height:850px;
+.loroLogo {
+  position: absolute;
+  right: 200px;
+  top: 0;
 }
 </style>

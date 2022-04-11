@@ -1,105 +1,142 @@
 <template>
-  <v-navigation-drawer
-    app
-    clipped
-    :mini-variant="$vuetify.breakpoint.xsOnly"
-    mini-variant-width="70"
-    mobile-breakpoint="150"
-  >
-    <v-list>
-      <v-list-item link @click="$router.push({ path: '/profile' })">
-        <v-list-item-avatar
-          size="67"
-        >
-          <v-img src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            {{ userName }}
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            My Profile
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <!-- <v-list-item link @click="$router.push({ path: '/profile' })">
+  <div>
+    <div v-if="!$vuetify.breakpoint.xs">
+      <v-navigation-drawer
+        app
+        clipped
+        :mini-variant="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly"
+        mini-variant-width="73"
+        mobile-breakpoint="600"
+      >
+        <v-list>
+          <v-list-item link @click="$router.push({ path: '/profile' })">
+            <v-list-item-avatar
+              size="67"
+            >
+              <v-img src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="text-h6">
+                {{ userName }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                My Profile
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <!-- <v-list-item link @click="$router.push({ path: '/profile' })">
         <v-list-item-icon>
           <v-icon>mdi-account-circle</v-icon>
         </v-list-item-icon>
         <v-list-item-title></v-list-item-title>
       </v-list-item> -->
-    </v-list>
-    <v-divider />
-    <v-list
-      nav
-      dense
-    >
-      <v-list-item link @click="$router.push({ path: '/home' })">
-        <v-list-item-icon>
-          <v-icon>mdi-home</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Home</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-record</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>My Streams</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-account-group</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Friends</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-message-reply</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Whispers</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-police-badge</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Badges</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-shuffle-variant</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Shuffle</v-list-item-title>
-      </v-list-item>
-    </v-list>
-    <template #append>
-      <v-list-item @click="dayOrNigth">
-        <v-list-item-icon>
-          <v-icon>
-            mdi-theme-light-dark
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-subtitle>Day/Nigth</v-list-item-subtitle>
-      </v-list-item>
-
-      <v-divider />
-      <div v-if="$vuetify.breakpoint.xsOnly" class="pa-2">
-        <v-btn
-          color="secondary"
-          fab
-          outlined
+        </v-list>
+        <v-divider />
+        <v-list
+          nav
+          dense
         >
-          <v-icon dark>
-            mdi-power
-          </v-icon>
+          <v-list-item link @click="$router.push({ path: '/home' })">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-record</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>My Streams</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-account-group</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Friends</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-message-reply</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Whispers</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-police-badge</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Badges</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-shuffle-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Shuffle</v-list-item-title>
+          </v-list-item>
+        </v-list>
+        <template #append>
+          <v-list-item @click="dayOrNigth">
+            <v-list-item-icon>
+              <v-icon>
+                mdi-theme-light-dark
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-subtitle>Day/Nigth</v-list-item-subtitle>
+          </v-list-item>
+
+          <v-divider />
+          <div v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly" class="pa-2">
+            <v-btn
+              color="secondary"
+              fab
+              outlined
+            >
+              <v-icon dark>
+                mdi-power
+              </v-icon>
+            </v-btn>
+          </div>
+          <div v-else class="pa-2">
+            <v-btn block>
+              Logout
+            </v-btn>
+          </div>
+        </template>
+      </v-navigation-drawer>
+    </div>
+    <div v-else>
+      <v-bottom-navigation fixed>
+        <v-btn value="recent">
+          <span>Recent</span>
+
+          <v-icon>mdi-history</v-icon>
         </v-btn>
-      </div>
-      <div v-else class="pa-2">
-        <v-btn block>
-          Logout
+
+        <v-btn value="favorites">
+          <span>Favorites</span>
+
+          <v-icon>mdi-heart</v-icon>
         </v-btn>
-      </div>
-    </template>
-  </v-navigation-drawer>
+
+        <v-btn value="nearby">
+          <span>Nearby</span>
+
+          <v-icon>mdi-map-marker</v-icon>
+        </v-btn>
+
+        <v-btn value="nearby">
+          <span>Nearby</span>
+
+          <v-icon>mdi-map-marker</v-icon>
+        </v-btn>
+
+        <v-btn value="nearby">
+          <span>Nearby</span>
+
+          <v-icon>mdi-map-marker</v-icon>
+        </v-btn>
+      </v-bottom-navigation>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -107,8 +144,7 @@ export default {
   name: 'NavigationDrawer',
   data () {
     return {
-      userName: '',
-      xs: true
+      userName: ''
     }
   },
   async mounted () {
