@@ -42,6 +42,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
@@ -62,4 +63,5 @@ v-card {
   right: 200px;
   top: 0;
 }
+
 </style>
