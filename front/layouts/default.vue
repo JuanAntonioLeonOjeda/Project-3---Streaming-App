@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app class="main" dark>
     <v-main>
       <Nuxt />
     </v-main>
@@ -11,3 +11,6 @@ export default {
 
 }
 </script>
+
+<style scoped>
+</style>

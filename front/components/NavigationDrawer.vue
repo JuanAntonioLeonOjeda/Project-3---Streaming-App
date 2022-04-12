@@ -7,6 +7,7 @@
         :mini-variant="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly"
         mini-variant-width="73"
         mobile-breakpoint="600"
+        color="#565de850"
       >
         <v-list>
           <v-list-item link @click="$router.push({ path: '/profile' })">
