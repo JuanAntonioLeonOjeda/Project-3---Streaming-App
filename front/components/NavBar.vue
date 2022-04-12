@@ -1,19 +1,52 @@
 <template>
   <v-app-bar
-    color="deep-purple accent-4"
+    color="#565EE8"
     dark
     app
     clipped-left
-    elevation="20"
+    elevation="2"
     rounded
   >
-    <v-container>
+    <v-container v-if="$vuetify.breakpoint.xsOnly">
+      <v-row class="align-center">
+        <!-- <v-col cols="2" class="text-center">
+          <v-btn text>
+            Discover
+          </v-btn>
+        </v-col>
+        <v-spacer /> -->
+        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <v-spacer />
+        <v-btn icon>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+      </v-row>
+    </v-container>
+    <v-container v-else-if="$vuetify.breakpoint.smOnly">
       <v-row class="align-center">
         <v-col cols="2" class="text-center">
-          <v-btn> Discover </v-btn>
+          <v-btn text>
+            Discover
+          </v-btn>
         </v-col>
         <v-spacer />
-        <v-icon>mdi-heart</v-icon>
+        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <v-spacer />
+        <v-btn icon>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+      </v-row>
+    </v-container>
+
+    <v-container v-else>
+      <v-row class="align-center">
+        <v-col cols="2" class="text-center">
+          <v-btn text>
+            Discover
+          </v-btn>
+        </v-col>
+        <v-spacer />
+        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
         <v-col cols="2">
           <v-toolbar-title>Peek Beats</v-toolbar-title>
         </v-col>
@@ -21,7 +54,6 @@
         <v-autocomplete
           v-model="model"
           :items="genres"
-          :search-input.sync="search"
           chips
           clearable
           hide-details
@@ -30,8 +62,6 @@
           item-value="symbol"
           label="Search for a genre..."
           solo-inverted
-          multiple
-          rounded
         >
           <template #no-data>
             <v-list-item>
@@ -49,15 +79,12 @@
               class="white--text"
               v-on="on"
             >
-              <v-icon left>
-                mdi-music-clef-treble
-              </v-icon>
               <span v-text="item.name" />
             </v-chip>
           </template>
           <template #item="{ item }">
             <v-list-item-avatar
-              color="indigo"
+              color="purple"
               class="text-h5 font-weight-light white--text"
             >
               {{ item.name.charAt(0) }}
@@ -66,9 +93,6 @@
               <v-list-item-title v-text="item.name" />
               <v-list-item-subtitle v-text="item.symbol" />
             </v-list-item-content>
-            <v-list-item-action>
-              <v-icon>mdi-music-clef-treble</v-icon>
-            </v-list-item-action>
           </template>
         </v-autocomplete>
       </v-row>
@@ -84,17 +108,25 @@ export default {
       isLoading: false,
       items: [],
       model: null,
-      search: null,
       tab: null,
-      genres: []
+      genres: [],
+      xs: true,
+      sm: true
     }
   },
   async mounted () {
     const genre = await this.$store.dispatch('getAllGenres')
     this.genres = genre
+  },
+  updated () {
+    this.$store.commit('searchValues', this.model)
   }
 }
 </script>
 
 <style lang='scss' scoped>
+.logo {
+  height: 50px;
+  width: 50px;
+}
 </style>

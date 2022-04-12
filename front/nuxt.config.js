@@ -1,9 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-
-  target: 'static',
-  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - peek-beats-front',
@@ -21,7 +18,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js' }
+      // { src: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js' }
     ]
   },
 
@@ -31,7 +28,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/vue-carousel-3d', ssr: false }
+    { src: '~plugins/vue-carousel-3d', ssr: false },
+    { src: '~plugins/vue-peerjs', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,13 +56,12 @@ export default {
     sockets: [
       {
         name: 'test',
-        // url: 'http://localhost:5000/'
-        url: 'https://peek-beats.herokuapp.com/'
+        url: 'http://localhost:5000/'
       }
     ],
     server: {
       cors: {
-        origin: 'https://peek-beats-front.herokuapp.com/'
+        origin: 'http://localhost:3000/'
       }
     }
   },
@@ -72,11 +69,15 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    // baseURL: 'http://localhost:5000/api'
-    baseURL: 'https://peek-beats.herokuapp.com/api'
+    baseURL: 'http://localhost:5000/api'
   },
 
   auth: {
+    redirect: {
+      login: '/',
+      home: '/home',
+      logout: '/'
+    },
     strategies: {
       local: {
         endpoints: {
@@ -84,7 +85,8 @@ export default {
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/users/me', method: 'get' }
         },
-        tokenType: ''
+        tokenType: '',
+        autoFetchUser: true
       }
     }
   },
@@ -114,7 +116,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // publicPath: 'https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js'
+    publicPath: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js/_nuxt/'
   },
 
   generate: {

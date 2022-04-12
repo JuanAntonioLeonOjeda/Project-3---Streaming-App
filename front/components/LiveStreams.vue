@@ -1,36 +1,47 @@
 <template>
-  <div>
+  <div class="mt-20">
     <div>
-      <client-only placeholder="Loading...">
-        <div v-if="typeof liveStreams === 'string'">
-          {{ liveStreams }}
-        </div>
-        <div v-else-if="loading" class="progress">
-          <v-progress-circular indeterminate :size="100" color="green" />
-        </div>
-        <div v-else-if="liveStreams.length !== 0">
-          Current Streams: {{ liveStreams.length }}
-          <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5">
-            <slide v-for="(stream, idx) in liveStreams" :key="idx" :index="idx">
-              <span class="title">Author: {{ stream.streamer.userName }}</span>
-              <p>Genre: {{ stream.genre.name }}</p>
-              <p>Current Viewers: {{ stream.currentViewers.length }}</p>
-              <p>Likes: {{ stream.likes.length }}</p>
-              <p>{{ stream.description }}</p>
-              <v-btn
-                class="ml-2 mt-5"
-                outlined
-                rounded
-                small
-                @click="joinStream(stream._id)"
+      <div v-if="typeof liveStreams === 'string'">
+        {{ liveStreams }}
+      </div>
+      <div v-else-if="loading" class="progress">
+        <div class="spacer" />
+        <LoadingAnimation />
+      </div>
+      <div v-else-if="liveStreams.length !== 0" class="text-center">
+        Current Streams: {{ liveStreams.length }}
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5" :height="200">
+          <slide v-for="(stream, idx) in liveStreams" :key="idx" :index="idx" class="slide" position="relative">
+            <span class="title">{{ stream.streamer.userName }}</span>
+            <v-avatar class="avatar">
+              <img
+                src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Avatar Image"
               >
-                <v-icon>mdi-play</v-icon>
-                WATCH STREAM
-              </v-btn>
-            </slide>
-          </carousel-3d>
-        </div>
-      </client-only>
+            </v-avatar>
+            <p class="genre-text">{{ stream.genre.name }}</p>
+            <p><v-icon>mdi-account-group</v-icon>  {{ stream.currentViewers.length }}</p>
+            <p class="mb-0"><v-icon>mdi-heart</v-icon>{{ stream.likes.length }}</p>
+            <v-container>
+              <v-row>
+                <v-col class="pt-1">
+                  <div class="text-center">
+                    <v-btn
+                      outlined
+                      rounded
+                      small
+                      @click="joinStream(stream._id)"
+                    >
+                      <v-icon>mdi-play</v-icon>
+                      WATCH STREAM
+                    </v-btn>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </slide>
+        </carousel-3d>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +59,12 @@ export default {
       }
     }
   },
+  // computed: {
+  //   searchGenres () {
+  //     if (this.$store.state.searchGenres === []) { return this.liveStreams }
+  //     return this.liveStreams.filter(stream => stream.genre.name.includes(this.$store.state.searchGenres))
+  //   }
+  // },
   async mounted () {
     try {
       const stream = await this.$store.dispatch('liveStreams')
@@ -60,7 +77,7 @@ export default {
   methods: {
     async joinStream (streamId) {
       const stream = await this.$store.dispatch('joinStream', streamId)
-      console.log(stream)
+      this.$store.state.streamInfo = stream
       this.$router.push({ path: `/streams/${stream.room}` })
     }
   }
@@ -71,12 +88,31 @@ export default {
 .carousel-3d-container {
   .carousel-3d-slide {
     padding: 20px;
-
     .title { font-size: 22px; }
   }
 }
+.logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+.slide {
+  background-image: url('../static/headphones_1.jpg');
+  background-position: right top;
+}
+.avatar {
+  position: absolute;
+  right: 25px;
+}
+.genre-text {
+  color: rgb(59, 59, 59)
+}
+.title {
+  font-size: 40px
+}
 </style>
-
       // <v-card max-width="400" class="mx-auto">
       //   <v-container>
       //     <v-row dense>

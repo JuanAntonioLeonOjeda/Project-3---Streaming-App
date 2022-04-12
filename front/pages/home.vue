@@ -2,8 +2,11 @@
   <div>
     <NavBar />
     <NavigationDrawer />
-    <LiveStreams />
     <CreateStreamButton />
+    <GenreAlert v-if="$store.state.genreAlert" />
+    <GenreSelect />
+    <LiveStreams />
+    <TopFive />
   </div>
 </template>
 

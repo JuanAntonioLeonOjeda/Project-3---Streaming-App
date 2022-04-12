@@ -2,7 +2,8 @@ const router = require('express').Router()
 const { authUser, authAdmin } = require('../utils')
 
 const { 
-    getAllUsers, 
+    getAllUsers,
+    getTopStreamers,
     deleteProfile, 
     getProfile, 
     updateProfile, 
@@ -25,6 +26,7 @@ const {
 
 router
     .get('/', authUser, authAdmin, getAllUsers)
+    .get('/top', authUser, getTopStreamers)
     .get('/me', authUser, getProfile)
     .delete('/me/security', authUser, deleteProfile)
     .put('/me', authUser, updateProfile)
@@ -41,7 +43,7 @@ router
     .delete('/me/favoriteGenres/:genreId', authUser, removeFavoriteGenre)
     .put('/me/security/password', authUser, changePassword)
 
-    .get('/:userId', authUser, authAdmin, getOneUser) //! params id or userId¿?¿?¿?
+    .get('/:userId', authUser, getOneUser) //! params id or userId¿?¿?¿?
     .post('/:userId/badges/:badgeId', authUser, authAdmin, addBadgeToUser)
     .delete('/:userId/badges/:badgeId', authUser, authAdmin, removeBadgeFromUser)
 

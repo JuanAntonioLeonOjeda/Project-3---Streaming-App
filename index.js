@@ -25,37 +25,28 @@ const app = express()
 const httpServer = createServer(app)
 const io = new Server (httpServer, {
   cors: {
-    origin:'https://peek-beats-front.herokuapp.com'
+    origin:'http://localhost:3000'
   }
 })
-
-io.on("hello", (arg, callback) => {
-  console.log(arg); // "world"
-  callback("got it");
-});
 
 const peerServer = ExpressPeerServer(httpServer, {
   debug: true
 })
 
 io.on('connection', (socket) => {
-  console.log('client connected')
-  io.on("hello", (arg, callback) => {
-    console.log(arg); // "world"
-    callback("got it");
-  });
-  socket.on('disconnect', () => {
-    console.log('client disconnected')
-  })
+  socket.emit('connection', socket.id)
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
     socket.to(roomId).emit('user-connected', userId)
+  })
+  socket.on('stream', (userId, stream) => {
+    socket.broadcast.emit('content', userId, stream)
   })
 })
 
 try {
   app
-    .use(cors({ origin: 'https://peek-beats-front.herokuapp.com' }))
+    .use(cors())
     .use(morgan('dev'))
     .use(express.json())
     .use(express.static('public'))
