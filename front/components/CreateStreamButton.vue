@@ -1,7 +1,12 @@
 <template>
   <v-container>
     <v-row>
-      <v-col offset="4" cols="4">
+      <v-col
+        cols="12"
+        md="8"
+        offset-md="2"
+        xs="12"
+      >
         <div class="text-center">
           <v-btn
             color="#565EE8"

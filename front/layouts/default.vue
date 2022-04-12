@@ -2,7 +2,7 @@
   <v-app dark>
     <v-main>
       <Nuxt />
-      <Footer />
+      <FooterBar />
     </v-main>
   </v-app>
 </template>

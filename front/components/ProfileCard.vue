@@ -42,9 +42,10 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  class="white--text"
                   color="deep-purple accent-4"
-                  depressed
+                  outlined
+                  x-large
+                  block
                 >
                   Apply
                 </v-btn>
@@ -87,9 +88,10 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  class="white--text"
                   color="deep-purple accent-4"
-                  depressed
+                  outlined
+                  x-large
+                  block
                 >
                   Apply
                 </v-btn>
@@ -106,7 +108,7 @@
           Favourites Genres
         </h1>
         <div v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly">
-          <v-card>
+          <v-card class="mb-16">
             <v-list>
               <v-list-item-group
                 multiple
@@ -125,9 +127,10 @@
             <v-card-actions>
               <v-spacer />
               <v-btn
-                class="white--text"
                 color="deep-purple accent-4"
-                depressed
+                outlined
+                x-large
+                block
               >
                 Apply
               </v-btn>
@@ -135,7 +138,7 @@
           </v-card>
         </div>
         <div v-else>
-          <v-card class="ml-10 mr-10 pl-10 pr-10 pt-10 pb-10">
+          <v-card class="ml-10 mr-10 mb-16 pl-10 pr-10 pt-10 pb-10">
             <v-list>
               <v-list-item-group
                 multiple
@@ -154,9 +157,10 @@
             <v-card-actions>
               <v-spacer />
               <v-btn
-                class="white--text"
                 color="deep-purple accent-4"
-                depressed
+                outlined
+                x-large
+                block
               >
                 Apply
               </v-btn>
