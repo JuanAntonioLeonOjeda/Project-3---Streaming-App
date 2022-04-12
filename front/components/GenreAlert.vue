@@ -3,7 +3,7 @@
     <v-row>
       <v-col offset="4" cols="4">
         <div class="text-center">
-          <v-alert
+          <!-- <v-alert
             dense
             outlined
             type="error"
@@ -11,6 +11,15 @@
             :value="$store.genreAlert"
           >
             Please select a <strong>music genre</strong>
+          </v-alert> -->
+          <v-alert
+            :class="{ alert: alert, 'text-danger': $store.state.genreAlert }"
+            border="top"
+            color="pink darken-1"
+            dark
+          >
+            Please select a <strong>music genre</strong>
+            <v-spacer />
           </v-alert>
         </div>
       </v-col>
@@ -20,7 +29,12 @@
 
 <script>
 export default {
-  name: 'GenreAlert'
+  name: 'GenreAlert',
+  data () {
+    return {
+      alert: true
+    }
+  }
 }
 </script>
 
