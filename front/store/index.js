@@ -1,4 +1,5 @@
 export const state = () => ({
+  user: {},
   roomId: '',
   streamer: false,
   streamVideo: '',
@@ -10,6 +11,10 @@ export const state = () => ({
 })
 
 export const mutations = {
+  saveUser (state, user) {
+    state.saveCurrentUser = user
+    this.$auth.setUser(state.user)
+  },
   stepChanger (state, step) {
     state.stepChange = step
   },

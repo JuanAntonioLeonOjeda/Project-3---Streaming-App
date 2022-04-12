@@ -79,7 +79,25 @@
               </p>
             </h3>
           </div>
-          <div class="text-center mt-5">
+          <div class="text-center">
+            <v-alert
+              :class="{ alert: alert, 'text-danger': hasError }"
+              border="top"
+              color="pink darken-1"
+              dark
+            >
+              Email or password incorrect.
+              <v-spacer />
+              <v-col class="shrink">
+                <v-btn
+                  color="white"
+                  outlined
+                  @click="hasError=true"
+                >
+                  Okay
+                </v-btn>
+              </v-col>
+            </v-alert>
             <v-btn
               :disabled="!valid"
               class="mt-5"
@@ -116,7 +134,9 @@ export default {
         v => !!v || 'Required.',
         v => v.length >= 8 || 'Min 8 characters'
       ],
-      passVisible: false
+      passVisible: false,
+      alert: true,
+      hasError: true
     }
   },
   methods: {
@@ -127,15 +147,21 @@ export default {
       this.$refs.form.validate()
     },
     async login () {
-      const user = await this.$auth.loginWith('local', {
-        data: {
-          email: this.email,
-          password: this.pass1
+      try {
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.pass1
+          }
+        })
+        this.$store.commit('saveCurrentUser', this.$auth.$state.user)
+        this.$router.push({ path: '/home' })
+      } catch (error) {
+        if (this.email || this.pass1 === '') {
+          this.hasError = true
         }
-      })
-      console.log(user)
-      console.log(this.$auth.user)
-      this.$router.push({ path: '/home' })
+        this.hasError = false
+      }
     }
   }
 }
@@ -146,5 +172,8 @@ export default {
   background-image: url("../static/cassette-blur.jpg");
   background-size: auto;
   background-position: center;
+}
+.text-danger {
+  display: none;
 }
 </style>

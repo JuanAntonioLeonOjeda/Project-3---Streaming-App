@@ -14,9 +14,11 @@
         <v-row class="main-row">
           <v-col
             cols="12"
-            md="4"
+            md="5"
+            lg="4"
             offset-md="2"
           >
+            <!-- deep-purple lighten-2 -->
             <v-card elevation="5" class="main-card blue-grey darken-3 accent-2" width="100%">
               <v-window v-model="$store.state.stepChange">
                 <v-window-item :value="2">

@@ -15,7 +15,7 @@
                 />
               </v-avatar>
               <h1>
-                {{ userEmail }}
+                {{ $auth.user.email }}
               </h1>
               <v-divider class="mt-3 mb-5" dark />
               <v-form>
@@ -25,7 +25,7 @@
                 <v-text-field
                   filled
                   color="deep-purple"
-                  :label="userName"
+                  :label="$auth.user.userName"
                   type="email"
                 />
                 <p>
@@ -61,7 +61,7 @@
                 />
               </v-avatar>
               <h1>
-                {{ userEmail }}
+                {{ $auth.user.email }}
               </h1>
               <v-divider class="mt-3 mb-5" dark />
               <v-form>
@@ -71,7 +71,7 @@
                 <v-text-field
                   filled
                   color="deep-purple"
-                  :label="userName"
+                  :label="$auth.user.userName"
                   type="email"
                 />
                 <p>
@@ -183,10 +183,6 @@ export default {
     }
   },
   async mounted () {
-    const user = await this.$store.dispatch('getUserName')
-    this.userName = user.userName
-    this.userEmail = user.email
-
     const genre = await this.$store.dispatch('getAllGenres')
     this.genres = genre
   }

@@ -47,7 +47,7 @@
         </v-col>
         <v-spacer />
         <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
-        <v-col cols="2">
+        <v-col cols="3">
           <v-toolbar-title>Peek Beats</v-toolbar-title>
         </v-col>
         <v-spacer />
