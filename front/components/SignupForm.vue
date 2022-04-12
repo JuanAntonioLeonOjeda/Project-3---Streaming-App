@@ -69,8 +69,27 @@
             label="E-mail"
             prepend-inner-icon="mdi-at"
             required
-            autocomplete="username email"
+            autocomplete="email"
           />
+          <v-alert
+            :class="{ alert: alert, 'text-danger': hasError }"
+            border="top"
+            color="pink darken-1"
+            dark
+          >
+            <v-spacer />
+            <v-col class="shrink">
+              <v-btn
+                class="text-center"
+                color="white"
+                outlined
+                block
+                @click="hasError=true"
+              >
+                Email already in use.
+              </v-btn>
+            </v-col>
+          </v-alert>
           <v-text-field
             v-model="pass1"
             background-color="blue-grey darken-2"
@@ -196,18 +215,20 @@
               </p>
             </h3>
           </div>
-          <v-btn
-            :disabled="!valid"
-            class="mt-5"
-            color="teal accent-2"
-            outlined
-            elevation="2"
-            x-large
-            block
-            @click="validate(); signup()"
-          >
-            SignUp
-          </v-btn>
+          <div class="text-center mt-5">
+            <v-btn
+              :disabled="!valid"
+              class="mt-5"
+              color="teal accent-2"
+              outlined
+              elevation="2"
+              x-large
+              block
+              @click="validate(); signup()"
+            >
+              SignUp
+            </v-btn>
+          </div>
         </v-form>
       </v-card-text>
     </v-col>
@@ -251,7 +272,9 @@ export default {
     modal: false,
     menu2: false,
     passVisible: false,
-    passVisible1: false
+    passVisible1: false,
+    alert: true,
+    hasError: true
   }),
   computed: {
     passwordConfirmationRule () {
@@ -276,14 +299,18 @@ export default {
       this.$router.push({ path: '/home' })
     },
     async signup () {
-      const form = {
-        userName: this.username,
-        email: this.email,
-        password: this.pass1,
-        dateOfBirth: this.date
+      try {
+        const form = {
+          userName: this.username,
+          email: this.email,
+          password: this.pass1,
+          dateOfBirth: this.date
+        }
+        await this.$store.dispatch('signup', form)
+        this.login()
+      } catch (error) {
+        this.hasError = false
       }
-      await this.$store.dispatch('signup', form)
-      this.login()
     }
   }
 }
@@ -295,6 +322,9 @@ export default {
   background-image: url("../static/cassette-blur.jpg");
   background-size: cover;
   background-position: center;
+}
+.text-danger {
+  display: none;
 }
 /* .formularios {
   background-image: url("https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");

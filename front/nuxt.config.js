@@ -82,10 +82,13 @@ export default {
         endpoints: {
           login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/users/me', method: 'get' }
+          user: { url: '/users/me', method: 'get', propertyName: false }
         },
-        tokenType: '',
-        autoFetchUser: true
+        user: {
+          autoFetch: true,
+          property: ''
+        },
+        tokenType: ''
       }
     }
   },

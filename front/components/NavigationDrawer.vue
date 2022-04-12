@@ -17,7 +17,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                {{ userName }}
+                {{ $auth.user.userName }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 My Profile
@@ -186,8 +186,6 @@ export default {
     }
   },
   async mounted () {
-    const user = await this.$store.dispatch('getUserName')
-    this.userName = user.userName
   },
   methods: {
     dayOrNigth () {
