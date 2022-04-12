@@ -9,7 +9,7 @@
       >
         <div class="text-center">
           <v-btn
-            color="#565EE8"
+            color="primary"
             x-large
             block
             class="mt-20"

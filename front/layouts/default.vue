@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app class="main" dark>
     <v-main>
       <Nuxt />
       <FooterBar />
@@ -12,3 +12,6 @@ export default {
 
 }
 </script>
+
+<style scoped>
+</style>
