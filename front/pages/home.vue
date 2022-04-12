@@ -7,6 +7,7 @@
     <GenreSelect />
     <LiveStreams />
     <TopFive />
+    <FooterBar />
   </div>
 </template>
 

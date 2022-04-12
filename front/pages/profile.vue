@@ -3,6 +3,7 @@
     <NavBar />
     <NavigationDrawer />
     <ProfileCard />
+    <FooterBar />
   </div>
 </template>
 

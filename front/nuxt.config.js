@@ -73,10 +73,12 @@ export default {
 
   auth: {
     redirect: {
-      login: '/',
-      home: '/home',
-      logout: '/'
+      login: '/login',
+      logout: '/',
+      callback: '/',
+      home: '/home'
     },
+    watchLoggedIn: true,
     strategies: {
       local: {
         endpoints: {
