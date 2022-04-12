@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="spacer" />
-    <div id="video-grid">
-      <img v-if="streamerRole" class="on-air" src="~/static/giphy.gif" alt="On Air">
-    </div>
+    <!-- <img v-if="streamerRole" class="on-air" src="~/static/giphy.gif" alt="On Air"> -->
+    <div id="video-grid" />
   </div>
 </template>
 
@@ -111,14 +110,14 @@ const connectToNewUser = (userId, stream, socket) => {
 </script>
 
 <style lang="scss" scoped>
-.on-air {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 200;
-    right: 10;
-  }
+// .on-air {
+//     width: 50px;
+//     height: 50px;
+//     position: absolute;
+//     top: 200;
+//     right: 10;
+//   }
 .spacer {
-  height: 100px;
+  height: 20px;
 }
 </style>

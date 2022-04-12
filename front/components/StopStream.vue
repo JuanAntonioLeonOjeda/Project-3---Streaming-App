@@ -1,8 +1,24 @@
 <template>
   <div>
-    <v-btn color="error" @click="stopStream">
-      Stop Stream
-    </v-btn>
+    <div class="bottom-bar d-flex justify-center">
+      <v-btn class="mx-2" fab color="error" @click="stopStream">
+        <v-icon dark>
+          mdi-stop
+        </v-icon>
+      </v-btn>
+      <v-spacer />
+      <!-- @click="offCamera()" -->
+      <v-btn class="mx-2" fab>
+        <v-icon dark>
+          mdi-camera
+        </v-icon>
+      </v-btn>
+      <v-btn class="mx-2" fab>
+        <v-icon dark>
+          mdi-microphone
+        </v-icon>
+      </v-btn>
+    </div>
   </div>
 </template>
 
