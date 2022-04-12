@@ -3,6 +3,7 @@
     <NavBar />
     <NavigationDrawer />
     <CreateStreamButton />
+    <GenreAlert v-if="$store.state.genreAlert" />
     <GenreSelect />
     <LiveStreams />
     <TopFive />

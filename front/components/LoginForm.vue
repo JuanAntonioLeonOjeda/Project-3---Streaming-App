@@ -127,12 +127,14 @@ export default {
       this.$refs.form.validate()
     },
     async login () {
-      await this.$auth.loginWith('local', {
+      const user = await this.$auth.loginWith('local', {
         data: {
           email: this.email,
           password: this.pass1
         }
       })
+      console.log(user)
+      console.log(this.$auth.user)
       this.$router.push({ path: '/home' })
     }
   }

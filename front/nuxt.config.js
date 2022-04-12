@@ -73,6 +73,11 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: '/',
+      home: '/home',
+      logout: '/'
+    },
     strategies: {
       local: {
         endpoints: {
@@ -80,7 +85,8 @@ export default {
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/users/me', method: 'get' }
         },
-        tokenType: ''
+        tokenType: '',
+        autoFetchUser: true
       }
     }
   },

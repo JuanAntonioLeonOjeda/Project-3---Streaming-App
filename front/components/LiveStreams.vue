@@ -10,17 +10,21 @@
       </div>
       <div v-else-if="liveStreams.length !== 0" class="text-center">
         Current Streams: {{ liveStreams.length }}
-        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5">
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5" :height="200">
           <slide v-for="(stream, idx) in liveStreams" :key="idx" :index="idx" class="slide" position="relative">
-            <span class="title">Author: {{ stream.streamer.userName }}</span>
-            <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
-            <p>Genre: {{ stream.genre.name }}</p>
-            <p>Current Viewers: {{ stream.currentViewers.length }}</p>
-            <p>Likes: {{ stream.likes.length }}</p>
-            <p>{{ stream.description }}</p>
+            <span class="title">{{ stream.streamer.userName }}</span>
+            <v-avatar class="avatar">
+              <img
+                src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Avatar Image"
+              >
+            </v-avatar>
+            <p class="genre-text">{{ stream.genre.name }}</p>
+            <p><v-icon>mdi-account-group</v-icon>  {{ stream.currentViewers.length }}</p>
+            <p class="mb-0"><v-icon>mdi-heart</v-icon>{{ stream.likes.length }}</p>
             <v-container>
               <v-row>
-                <v-col>
+                <v-col class="pt-1">
                   <div class="text-center">
                     <v-btn
                       outlined
@@ -55,6 +59,12 @@ export default {
       }
     }
   },
+  // computed: {
+  //   searchGenres () {
+  //     if (this.$store.state.searchGenres === []) { return this.liveStreams }
+  //     return this.liveStreams.filter(stream => stream.genre.name.includes(this.$store.state.searchGenres))
+  //   }
+  // },
   async mounted () {
     try {
       const stream = await this.$store.dispatch('liveStreams')
@@ -68,7 +78,6 @@ export default {
     async joinStream (streamId) {
       const stream = await this.$store.dispatch('joinStream', streamId)
       this.$store.state.streamInfo = stream
-      console.log(stream)
       this.$router.push({ path: `/streams/${stream.room}` })
     }
   }
@@ -79,7 +88,6 @@ export default {
 .carousel-3d-container {
   .carousel-3d-slide {
     padding: 20px;
-
     .title { font-size: 22px; }
   }
 }
@@ -92,7 +100,17 @@ export default {
 }
 .slide {
   background-image: url('../static/headphones_1.jpg');
-  background-position: right -35px top;
+  background-position: right top;
+}
+.avatar {
+  position: absolute;
+  right: 25px;
+}
+.genre-text {
+  color: rgb(59, 59, 59)
+}
+.title {
+  font-size: 40px
 }
 </style>
       // <v-card max-width="400" class="mx-auto">

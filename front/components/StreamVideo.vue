@@ -14,7 +14,7 @@ export default {
   name: 'StreamVideo',
   data () {
     return {
-      stramerRole: this.$store.state.streamer
+      streamerRole: this.$store.state.streamer
     }
   },
   mounted () {
@@ -28,7 +28,7 @@ export default {
       name: 'stream'
     })
 
-    if (this.$store.state.role === 'streamer') {
+    if (this.streamerRole) {
       navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true

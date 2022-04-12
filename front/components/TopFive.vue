@@ -19,11 +19,11 @@
               <v-spacer />
               <v-col cols="3">
                 <div class="avatar-container" position="absolute">
-                  <img src="../static/peek-beats-logo.JPG" alt="Avatar">
+                  <img src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Avatar Image">
                 </div>
               </v-col>
               <v-spacer />
-              <v-col cols="6">
+              <v-col cols="6" class="pt-1">
                 <span class="title">{{ slide.userName }}</span>
                 <p class="mb-0">Followers: {{ slide.followers.length }} </p>
                 <p>Streams made: {{ slide.myStreams.length }} </p>
@@ -62,7 +62,9 @@ export default {
   margin-top: 50px;
 }
 img {
+  margin-top: 6px;
   border-radius: 50%;
+  height: 60px;
 }
 .avatar-container {
   height: 50px;
@@ -72,6 +74,10 @@ img {
   display: inline-block;
 }
 .slide {
-  background-color: #565EE8;
+  background-color: #565de850;
+  border-radius: 25px;
+  border-color: #565EE8;
+  border-style: solid;
+  border-width: 5px !important;
 }
 </style>

@@ -92,6 +92,9 @@ export default {
   async mounted () {
     const genre = await this.$store.dispatch('getAllGenres')
     this.genres = genre
+  },
+  updated () {
+    this.$store.commit('searchValues', this.model)
   }
 }
 </script>

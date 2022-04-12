@@ -4,7 +4,9 @@ export const state = () => ({
   streamVideo: '',
   streamInfo: {},
   stepChange: 1,
-  genreId: ''
+  genreId: '',
+  searchGenres: [],
+  genreAlert: false
 })
 
 export const mutations = {
@@ -25,6 +27,12 @@ export const mutations = {
   },
   saveGenre (state, genre) {
     state.genreId = genre
+  },
+  searchValues (state, model) {
+    state.searchGenres = model
+  },
+  genreAlert (state, bool) {
+    state.genreAlert = bool
   }
 }
 

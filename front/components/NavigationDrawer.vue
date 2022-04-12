@@ -94,7 +94,7 @@
         </v-btn>
       </div>
       <div v-else class="pa-2">
-        <v-btn block>
+        <v-btn block color="red">
           Logout
         </v-btn>
       </div>
