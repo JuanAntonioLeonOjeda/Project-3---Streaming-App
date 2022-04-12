@@ -15,7 +15,7 @@
           </v-btn>
         </v-col>
         <v-spacer /> -->
-        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <img class="logo" src="../static/peekbeats-logo2.png" alt="Parrot Logo">
         <v-spacer />
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
@@ -30,7 +30,7 @@
           </v-btn>
         </v-col>
         <v-spacer />
-        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <img class="logo" src="../static/peekbeats-logo2.png" alt="Parrot Logo">
         <v-spacer />
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
@@ -40,13 +40,15 @@
 
     <v-container v-else>
       <v-row class="align-center">
-        <v-col cols="2" class="text-center">
+        <v-col cols="1">
           <v-btn text>
             Discover
           </v-btn>
         </v-col>
         <v-spacer />
-        <img class="logo" src="../static/peek-beats-logo.JPG" alt="Parrot Logo">
+        <v-col cols="4">
+        </v-col>
+        <img class="logo" src="../static/peekbeats-logo2.png" alt="Parrot Logo">
         <v-col cols="3">
           <v-toolbar-title>Peek Beats</v-toolbar-title>
         </v-col>

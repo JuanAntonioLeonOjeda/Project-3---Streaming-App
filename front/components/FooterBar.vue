@@ -1,5 +1,5 @@
 <template>
-  <v-footer absolute>
+  <v-footer absolute color="#565EE8">
     <v-container>
       <v-card>
         <h6 class="text-center">
@@ -14,4 +14,8 @@ export default {
   name: 'FooterBar'
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h6 {
+  background-color: #2730df50
+}
+</style>

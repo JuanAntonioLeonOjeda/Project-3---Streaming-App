@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col>
         <div class="text-center">
-          <v-progress-circular indeterminate :size="200" color="green" />
+          <v-progress-circular indeterminate :size="200" color="primary" />
         </div>
         <div class="mt-10 text-center">
           Searching...
