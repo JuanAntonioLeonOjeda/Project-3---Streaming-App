@@ -28,8 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/vue-carousel-3d', ssr: false },
-    { src: '~plugins/vue-peerjs', ssr: false }
+    { src: '~plugins/vue-carousel-3d', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -116,7 +115,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    publicPath: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js/_nuxt/'
   },
 
   generate: {
