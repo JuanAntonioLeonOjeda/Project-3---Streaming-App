@@ -18,12 +18,11 @@
             position="relative"
             :style="`background-image:url(${stream.genre.image}); border-radius: 25px;border-color: #565EE8; border-style: solid;border-width: 5px !important;`">
             <span class="slideText title">{{ stream.streamer.userName }}</span>
-            <v-avatar class="avatar" size="67" style="backround-size: cover">
-              <img
-                :src="`${stream.streamer.avatar}`"
-                alt="Avatar Image"
-              >
-            </v-avatar>
+            <div class="avatar-container" position="absolute">
+              <v-list-item-avatar size="67">
+                <v-img :src="`${stream.streamer.avatar}`" alt="Avatar Image" />
+              </v-list-item-avatar>
+            </div>
             <p class="slideText genre-text">{{ stream.genre.name }}</p>
             <p class="slideText"><v-icon class="slideText">mdi-account-group</v-icon>  {{ stream.currentViewers.length }}</p>
             <p class="slideText mb-0"><v-icon class="slideText">mdi-heart</v-icon>{{ stream.likes.length }}</p>
@@ -120,6 +119,12 @@ export default {
 .slideText {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+}
+.avatar-container {
+  top: 0;
+  right: 100;
+  display: inline-block;
+  float: right;
 }
 </style>
       // <v-card max-width="400" class="mx-auto">

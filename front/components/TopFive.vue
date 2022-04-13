@@ -19,11 +19,11 @@
           <v-container>
             <v-row justify="center">
               <v-spacer />
-              <v-col cols="3">
+              <v-col cols="3" class="pt-1">
                 <div class="avatar-container" position="absolute">
-                  <v-avatar size="67">
-                    <img :src="`${slide.avatar}`" alt="Avatar Image">
-                  </v-avatar>
+                  <v-list-item-avatar size="67">
+                    <v-img :src="`${slide.avatar}`" alt="Avatar Image" />
+                  </v-list-item-avatar>
                 </div>
               </v-col>
               <v-spacer />
@@ -67,8 +67,6 @@ export default {
 }
 img {
   margin-top: 6px;
-  // border-radius: 50%;
-  // height: 60px;
 }
 .avatar-container {
   top: 0;
@@ -81,5 +79,8 @@ img {
   border-color: #565EE8;
   border-style: solid;
   border-width: 5px !important;
+}
+.avatar {
+  background-size: cover !important;
 }
 </style>
