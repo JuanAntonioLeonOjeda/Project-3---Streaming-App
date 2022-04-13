@@ -15,7 +15,9 @@ async function getAllStreams(req, res) {
 async function getLiveStreams(req, res) {
   try {
     if(Object.keys(req.query)[0] === 'genre') {
-      const genre = await GenreModel.findById(req.query.genre).populate('genre')
+      const genre = await GenreModel.findById(req.query.genre)
+      .populate('genre')
+      .populate('streamer')
 
       const query = { live: true, genre: genre }
       const streams = await searchStreams(query)
@@ -37,7 +39,7 @@ async function getLiveStreams(req, res) {
 
 async function searchStreams(query) {
   return await StreamModel.find(query, { quality: 0 })
-    .populate('streamer', 'userName')
+    .populate('streamer')
     .populate('genre', 'name')
 }
 

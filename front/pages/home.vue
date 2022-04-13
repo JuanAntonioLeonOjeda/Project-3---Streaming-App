@@ -2,9 +2,9 @@
   <div>
     <NavBar />
     <NavigationDrawer />
-    <CreateStreamButton />
-    <GenreAlert v-if="$store.state.genreAlert" />
     <GenreSelect />
+    <GenreAlert v-if="$store.state.genreAlert" />
+    <CreateStreamButton />
     <LiveStreams />
     <TopFive />
     <FooterBar />

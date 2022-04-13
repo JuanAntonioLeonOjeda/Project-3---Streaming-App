@@ -9,7 +9,6 @@
         <LoadingAnimation />
       </div>
       <div v-else-if="liveStreams.length !== 0" class="text-center">
-        Current Streams: {{ liveStreams.length }}
         <carousel-3d :autoplay="true" :autoplay-timeout="5000" :clickable="true" :display="5" :height="200">
           <slide
             v-for="(stream, idx) in liveStreams"
@@ -19,9 +18,9 @@
             position="relative"
             :style="`background-image:url(${stream.genre.image}); border-radius: 25px;border-color: #565EE8; border-style: solid;border-width: 5px !important;`">
             <span class="slideText title">{{ stream.streamer.userName }}</span>
-            <v-avatar class="avatar">
+            <v-avatar class="avatar" size="67" style="backround-size: cover">
               <img
-                src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                :src="`${stream.streamer.avatar}`"
                 alt="Avatar Image"
               >
             </v-avatar>
