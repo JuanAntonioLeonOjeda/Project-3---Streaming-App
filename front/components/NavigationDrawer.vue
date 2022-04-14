@@ -14,7 +14,7 @@
             <v-list-item-avatar
               size="67"
             >
-              <v-img src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+              <v-img :src="`${avatar}`" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
@@ -184,7 +184,8 @@ export default {
   name: 'NavigationDrawer',
   data () {
     return {
-      userName: ''
+      userName: '',
+      avatar: this.$auth.user.avatar
     }
   },
   async mounted () {

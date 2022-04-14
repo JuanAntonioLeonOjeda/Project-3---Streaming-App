@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="text-center">
-      Top 5 Streamers
+      <h2 class="mb-0">
+        Top 5 Streamers
+      </h2>
     </div>
     <div v-if="loading" class="progress">
       <LoadingAnimation />
@@ -17,9 +19,11 @@
           <v-container>
             <v-row justify="center">
               <v-spacer />
-              <v-col cols="3">
+              <v-col cols="3" class="pt-1">
                 <div class="avatar-container" position="absolute">
-                  <img src="https://images.pexels.com/photos/4566232/pexels-photo-4566232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Avatar Image">
+                  <v-list-item-avatar size="67">
+                    <v-img :src="`${slide.avatar}`" alt="Avatar Image" />
+                  </v-list-item-avatar>
                 </div>
               </v-col>
               <v-spacer />
@@ -63,12 +67,8 @@ export default {
 }
 img {
   margin-top: 6px;
-  border-radius: 50%;
-  height: 60px;
 }
 .avatar-container {
-  height: 50px;
-  width: 60px;
   top: 0;
   left: 100;
   display: inline-block;
@@ -79,5 +79,8 @@ img {
   border-color: #565EE8;
   border-style: solid;
   border-width: 5px !important;
+}
+.avatar {
+  background-size: cover !important;
 }
 </style>

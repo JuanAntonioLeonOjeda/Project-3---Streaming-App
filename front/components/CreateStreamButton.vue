@@ -1,11 +1,12 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container class="mt-0 pt-0 mb-10">
+    <v-row class="mb-10">
       <v-col
         cols="12"
         md="8"
         offset-md="2"
         xs="12"
+        class="mt-0 pt-0"
       >
         <div class="text-center">
           <v-btn

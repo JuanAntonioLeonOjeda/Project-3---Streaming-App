@@ -1,9 +1,9 @@
 <template>
-  <v-footer absolute color="#565EE8">
+  <v-footer v-if="!$vuetify.breakpoint.xs" absolute color="#565EE8">
     <v-container>
       <v-card>
         <h6 class="text-center">
-          PeekBeats © All Rights Reserved
+          PeekBeats © {{ new Date().getFullYear() }} — All Rights Reserved
         </h6>
       </v-card>
     </v-container>
