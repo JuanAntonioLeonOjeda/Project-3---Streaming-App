@@ -111,7 +111,7 @@ export default {
       z-index: 50;
       height: calc(70vh - 90px);
       width: 100%;
-      background-color: #7f828b31;
+      background-color: #7f828b  31;
     }
 
     .bottom-bar {

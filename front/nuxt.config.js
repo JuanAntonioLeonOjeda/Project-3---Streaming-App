@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ],
     script: [
       // { src: 'https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js' }
@@ -106,13 +106,25 @@ export default {
       dark: true,
       themes: {
         dark: {
+          // 363E43
           primary: '#1CEFBD',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          bar: '#374750'
+        },
+        light: {
+          // primary: '#1CEFBD',
+          // accent: colors.grey.darken3,
+          // secondary: colors.amber.darken3,
+          // info: colors.teal.lighten1,
+          // warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          // success: colors.green.accent3,
+          bar: '#547192'
         }
       }
     }

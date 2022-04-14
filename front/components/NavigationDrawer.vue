@@ -7,7 +7,7 @@
         :mini-variant="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly"
         mini-variant-width="73"
         mobile-breakpoint="600"
-        color="#565de850"
+        color="bar"
       >
         <v-list>
           <v-list-item link @click="$router.push({ path: '/profile' })">
@@ -82,6 +82,7 @@
             <!-- <v-list-item-subtitle>Day/Nigth</v-list-item-subtitle> -->
             <v-container class="ml-5" fluid>
               <v-switch
+                color="white"
                 inset
               />
             </v-container>
