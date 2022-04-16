@@ -1,11 +1,13 @@
 <template>
-  <v-footer v-if="!$vuetify.breakpoint.xs" absolute color="#565EE8">
+  <v-footer v-if="!$vuetify.breakpoint.xs" inset height="70" width="auto" app>
     <v-container>
-      <v-card>
-        <h6 class="text-center">
-          PeekBeats © {{ new Date().getFullYear() }} — All Rights Reserved
-        </h6>
-      </v-card>
+      <v-row justify="center">
+        <v-col lg="2" md="3" cols="12" align-self="center">
+          <h5 class="text-center">
+            PeekBeats © {{ new Date().getFullYear() }} — All Rights Reserved
+          </h5>
+        </v-col>
+      </v-row>
     </v-container>
   </v-footer>
 </template>
@@ -15,7 +17,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-h6 {
-  background-color: #2730df50
+h1 {
+  background-color: #565de849
 }
 </style>

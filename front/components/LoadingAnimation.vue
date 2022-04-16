@@ -5,7 +5,7 @@
         <div class="text-center">
           <v-progress-circular indeterminate :size="200" color="primary" />
         </div>
-        <div class="mt-10 text-center">
+        <div class="mt-3 text-center">
           Searching...
         </div>
       </v-col>

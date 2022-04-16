@@ -1,19 +1,18 @@
 <template>
-  <v-container class="mt-0 pt-0 mb-10">
-    <v-row class="mb-10">
+  <v-container class="mt-0 pt-0">
+    <v-row justify="center">
       <v-col
         cols="12"
-        md="8"
-        offset-md="2"
+        md="6"
         xs="12"
         class="mt-0 pt-0"
       >
         <div class="text-center">
           <v-btn
-            color="primary"
+            color="accent"
             x-large
             block
-            class="mt-20"
+            :class="$vuetify.theme.dark === true ? 'mb-4 black--text' : 'mb-4 white--text'"
             @click="startStream"
           >
             Start Stream
@@ -51,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div {
-    margin-top: 5px;
-  }
+div {
+  margin-top: 5px;
+}
 </style>

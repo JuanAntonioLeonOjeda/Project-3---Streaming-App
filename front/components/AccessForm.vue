@@ -1,26 +1,44 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main v-if="$vuetify.breakpoint.sm || $vuetify.breakpoint.xs">
+      <v-card
+        flat
+        tile
+        class="main-card"
+        color="#fff"
+        width="100%"
+        height="100%"
+      >
+        <v-window v-model="$store.state.stepChange">
+          <v-window-item :value="2">
+            <SignupForm />
+          </v-window-item>
+          <v-window-item :value="1">
+            <LoginForm />
+          </v-window-item>
+        </v-window>
+      </v-card>
+    </v-main>
+    <v-main v-else>
       <v-container class="mt-5 fill-height" fluid>
         <div class="loroLogo">
           <v-spacer />
           <v-img
             class="move"
-            height="280"
-            width="460"
-            :src="require('../static/WelcomePage.png')"
+            width="45vw"
+            :src="require('../static/PEEKBEATS.png')"
           />
         </div>
         <v-row class="main-row">
           <v-col
             cols="12"
-            offset-lg="1"
+            offset-lg="7"
             lg="4"
-            offset-md="1"
+            offset-md="7"
             md="5"
           >
             <!-- deep-purple lighten-2 -->
-            <v-card elevation="5" class="main-card" color="#3D8287" width="100%">
+            <v-card flat tile class="main-card" color="#fff" width="100%">
               <v-window v-model="$store.state.stepChange">
                 <v-window-item :value="2">
                   <SignupForm />
@@ -48,12 +66,16 @@ export default {
 
 </script>
 
+  // background-image: url("https://images.pexels.com/photos/3916376/pexels-photo-3916376.jpeg");
+  // background-image: url("https://images.pexels.com/photos/2952834/pexels-photo-2952834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  // background-image: url("https://images.pexels.com/photos/3052360/pexels-photo-3052360.jpeg");
 <style scoped>
 #app {
   position: relative;
-  background-image: url("https://images.pexels.com/photos/995301/pexels-photo-995301.jpeg");
+  background-image: url("https://images.pexels.com/photos/8512607/pexels-photo-8512607.jpeg");
   background-size: cover;
   background-position: center;
+  margin: -20px !important;
 }
 .main-card {
  padding: 25px;
@@ -63,8 +85,8 @@ v-card {
 }
 .loroLogo {
   position: absolute;
-  right: 250px;
-  top: 320px;
+  left: 8%;
+  top: 45%;
 }
 .move {
   animation:bounce-in-bck 1.5s both

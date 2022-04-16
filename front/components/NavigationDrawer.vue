@@ -3,6 +3,7 @@
     <div v-if="!$vuetify.breakpoint.xs">
       <v-navigation-drawer
         app
+        width="190"
         clipped
         :mini-variant="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly"
         mini-variant-width="73"
@@ -12,9 +13,9 @@
         <v-list>
           <v-list-item link @click="$router.push({ path: '/profile' })">
             <v-list-item-avatar
-              size="67"
+              size="60"
             >
-              <v-img :src="`${avatar}`" />
+              <v-img :src="`https://images.pexels.com/photos/2050994/pexels-photo-2050994.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
@@ -25,17 +26,10 @@
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-          <!-- <v-list-item link @click="$router.push({ path: '/profile' })">
-        <v-list-item-icon>
-          <v-icon>mdi-account-circle</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title></v-list-item-title>
-      </v-list-item> -->
         </v-list>
         <v-divider />
         <v-list
           nav
-          dense
         >
           <v-list-item link @click="$router.push({ path: '/home' })">
             <v-list-item-icon>
@@ -75,47 +69,47 @@
           </v-list-item>
         </v-list>
         <template #append>
-          <v-list-item @click="dayOrNigth">
-            <v-icon>
+          <v-list-item class="mb-6" @click="dayOrNigth">
+            <v-icon x-large>
               mdi-theme-light-dark
             </v-icon>
             <!-- <v-list-item-subtitle>Day/Nigth</v-list-item-subtitle> -->
-            <v-container class="ml-5" fluid>
+            <v-container class="ml-4" fluid>
               <v-switch
-                color="white"
+                color="grey"
                 inset
               />
             </v-container>
           </v-list-item>
 
-          <v-divider />
           <div v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.xsOnly" class="pa-2">
             <v-btn
               color="red darken-1"
-              outlined
-              elevation="2"
+              :outlined="$vuetify.theme.dark === true ? false : true"
               block
               fab
             >
               <v-icon dark>
-                mdi-power
+                mdi-logout
               </v-icon>
             </v-btn>
           </div>
           <div v-else class="pa-2">
             <v-btn
               color="red darken-1"
-              outlined
-              elevation="2"
+              :outlined="$vuetify.theme.dark === true ? false : true"
               x-large
               block
             >
-              Logout
+              <v-icon dark>
+                mdi-logout
+              </v-icon>
             </v-btn>
           </div>
         </template>
       </v-navigation-drawer>
     </div>
+
     <div v-else>
       <v-bottom-navigation
         fixed
